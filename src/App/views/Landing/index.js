@@ -23,6 +23,9 @@ const statusChangeCallback = (response /* 1 */, updateAuthResponse, updateFacebo
     window.FB.api('/me/family', (response) => {
       updateFacebookUserData({ family: response.data })
     })
+    window.FB.api('/me/picture', (response) => {
+      updateFacebookUserData({ picture: response.data })
+    })
   }
 }
 
@@ -50,21 +53,17 @@ window.fbAsyncInit = () => {
 const login = (updateAuthResponse, updateFacebookUserData) => {
   window.FB.login(() => {
     window.FB.getLoginStatus((response) => {
+      console.log('response: ', response)
       statusChangeCallback(response, updateAuthResponse, updateFacebookUserData)
     })
   }, {
-    scope: 'user_relationships,email'
+    scope: 'user_relationships,email',
+    return_scopes: true
   })
 }
 
 const Landing = ({
-  session: {
-    status,
-    user: {
-      first_name: firstName,
-      family
-    }
-  },
+  session,
 
   updateAuthResponse,
   updateFacebookUserData
@@ -73,30 +72,13 @@ const Landing = ({
     <h1>Landing</h1>
     <div>
       {
-        status === 'connected'
-        ? (
-          <div>
-            <div>Welcome {firstName}</div>
-            {
-              family
-              ? (
-                <div>Here is your family:
-                  <ul>
-                    {
-                      family.map((person) => <li>{person.firstName}</li>)
-                    }
-                  </ul>
-                </div>
-              )
-              : undefined
-            }
-          </div>
-        )
+        session.status === 'connected'
+        ? <pre>{JSON.stringify(session, null, 2)}</pre>
         : (
-          <div
-            className={style.facebookLoginButton}
+          <a
+            style={{color: '#00f'}}
             onClick={login.bind(null, updateAuthResponse, updateFacebookUserData)}
-          >Login with Facebook</div>
+          >Login with Facebook</a>
         )
       }
     </div>
@@ -110,6 +92,6 @@ Landing.propTypes = {
   updateFacebookUserData: PropTypes.func
 }
 
-export default connect(({session}) => ({
+export default connect(({session}) => { console.log('session: ', session); return {
   session
-}), { updateAuthResponse, updateFacebookUserData })(Landing)
+}}, { updateAuthResponse, updateFacebookUserData })(Landing)
