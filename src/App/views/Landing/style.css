@@ -34,3 +34,12 @@
     font-size: 3em;
   }
 }
+
+.facebookLoginButton {
+  display: inline-block;
+  background: #000;
+  padding: 20px;
+  color: #fff;
+  font-size: 1.2em;
+  cursor: pointer;
+}
