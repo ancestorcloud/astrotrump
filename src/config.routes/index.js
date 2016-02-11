@@ -16,31 +16,17 @@ index
   }
 </Route>
 
-const routes = getRoute({
-  path: '/',
-  component: App,
-  children: [
-    {
-      index: true,
-      component: makeAsyncScript({
-        Component: Landing,
-        scriptUrl: '//connect.facebook.net/en_US/sdk.js',
-        globalName: 'FB'
-      })
-    },
-    {
-      path: 'landing/:person',
-      component: Landing
-    },
-    {
-      path: 'tree',
-      component: Tree
-    },
-    {
-      path: 'result',
-      component: Result
-    }
-  ]
-})
+const routes = getRoute(
+  { path: '/', component: App, children: [
+    { index: true, component: makeAsyncScript({
+      Component: Landing,
+      scriptUrl: '//connect.facebook.net/en_US/sdk.js',
+      globalName: 'FB'
+    }) },
+    { path: 'landing/:person', component: Landing },
+    { path: 'tree', component: Tree },
+    { path: 'result', component: Result }
+  ] }
+)
 
 export default routes
