@@ -4,14 +4,42 @@ import App from 'App'
 import Landing from 'App/views/Landing'
 import SubmitTree from 'App/views/SubmitTree'
 import Result from 'App/views/Result'
+import { makeAsyncScript } from '../App/shared/hoc.asyncScriptLoader'
 
-const routes = (
-  <Route path='/' component={App}>
-    <IndexRoute component={Landing} />
-    <Route path='landing/:person' component={Landing} />
-    <Route path='tree' component={SubmitTree} />
-    <Route path='result' component={Result} />
-  </Route>
-)
+const getRoute = ({ index, path, component, children = [] }, key) =>
+index
+? <IndexRoute {...{path, component, key}} />
+: <Route {...{path, component, key}} >
+  {
+    children.map((childRoute, index) => getRoute(childRoute, index))
+  }
+</Route>
+
+const routes = getRoute({
+  path: '/',
+  component: App,
+  children: [
+    {
+      index: true,
+      component: makeAsyncScript({
+        Component: Landing,
+        scriptUrl: '//connect.facebook.net/en_US/sdk.js',
+        globalName: 'FB'
+      })
+    },
+    {
+      path: 'landing/:person',
+      component: Landing
+    },
+    {
+      path: 'tree',
+      component: SubmitTree
+    },
+    {
+      path: 'result',
+      component: Result
+    }
+  ]
+})
 
 export default routes
