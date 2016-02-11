@@ -1,0 +1,18 @@
+@import 'settings.colors';
+
+.base {
+  position: relative;
+  composes: btn-normalized from 'App/style/components';
+  font-size: 1.4em;
+  padding: 12px;
+  max-width: 250px;
+  width: 100%;
+  border-radius: 7px;
+}
+
+.aqua {
+  composes: base;
+
+  color: white;
+  background-color: var(--clr-cyan);
+}

@@ -1,0 +1,9 @@
+@import 'settings.colors';
+
+.header {
+  text-align: center;
+}
+
+.h1 {
+  color: var(--clr-red);
+}

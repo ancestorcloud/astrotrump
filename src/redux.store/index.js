@@ -47,5 +47,6 @@ export function configureStore (initialState) {
   return store
 }
 
-export const getStore = () => store
-
+export function getStore () {
+  return store
+}

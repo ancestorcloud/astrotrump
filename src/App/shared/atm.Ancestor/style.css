@@ -1,0 +1,27 @@
+@import 'settings.colors';
+
+.container {
+  border: solid 1px var(--clr-dark-grey);
+  border-radius: 100%;
+  background-size: 90%;
+  background-repeat: no-repeat;
+  background-position: left 50% bottom 0;
+}
+
+.undiscovered {
+  composes: container;
+  background-color: var(--clr-dark-base);
+}
+
+.discovered {
+  composes: container;
+  background-color: var(--clr-dark-mint);
+}
+
+.male {
+  background-image: url('/assets/icons/male.svg');
+}
+
+.female {
+  background-image: url('/assets/icons/female.svg');
+}
