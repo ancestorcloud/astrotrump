@@ -120,7 +120,17 @@ const Landing = ({
         </div>
       </div>
       <div className={style.heroFooter}>
-        <span>{'built with <3 by AncestorCloud'}</span>
+        <span>built with</span>
+        &nbsp;
+        <img
+          src='/images/heart.svg'
+          style={{
+            display: 'inline-block',
+            width: '20px'
+          }}
+        />
+        &nbsp;
+        <span>by AncestorCloud</span>
       </div>
     </div>
   )
