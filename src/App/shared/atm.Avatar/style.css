@@ -1,0 +1,7 @@
+.Avatar {
+  border: 4px solid white;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 50%;
+}
