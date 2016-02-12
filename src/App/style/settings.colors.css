@@ -2,9 +2,6 @@
 --clr-blue:          #4FC1E9;
 --clr-dark-blue:     #3BAFDA;
 
---clr-navy:          #477EA8;
---clr-dark-navy:     #345C7C;
-
 --clr-mint:          #48CFAD;
 --clr-dark-mint:     #37BC9B;
 
@@ -30,7 +27,9 @@
 
 --clr-cyan:          #0AA7C6;
 
---clr-rust:          #CC3C27;
+--clr-navy:          #1e3141;
+--clr-cream:         #F3E8D3;
+--clr-rust:          #9b080d;
 --clr-facebook-blue: #415DA3;
 }
 

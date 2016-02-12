@@ -2,6 +2,7 @@ import style from './style'
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import cn from 'classnames'
+import Avatar from 'atm.Avatar'
 
 const sizing = {
   tiny: '20px',
@@ -10,21 +11,8 @@ const sizing = {
   large: '120px'
 }
 
-const setSize = size => ({
-  width: size,
-  height: size
-})
-
 const Ancestor = ({size = 'default', gender = 'female', discovered = false}) =>
-  <div
-    style={{ ...setSize(sizing[size]) }}
-    className={cn({
-      [style.discovered]: discovered,
-      [style.undiscovered]: !discovered,
-      [style.male]: gender === 'male',
-      [style.female]: gender === 'female'
-    })}
-  />
+  <Avatar src={`/assets/icons/${gender}.svg`} size={sizing[size]} />
 
 Ancestor.propTypes = {
   size: PropTypes.oneOf([

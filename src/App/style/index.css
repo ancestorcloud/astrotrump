@@ -6,7 +6,12 @@
 @import "generic.normalize";
 @import "generic.box-sizing";
 
-@import "base.typography";
+html {
+   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--base-font-family);
+  text-rendering: optimizeLegibility;
+}
 
 html,
 body,
@@ -14,4 +19,10 @@ body,
   height: 100%;
   font-family: arial;
   color: var(--clr-darkest-grey);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--header-font-weight);
+  margin: 0;
+  padding: 0;
 }

@@ -2,52 +2,78 @@ import style from './style'
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Y, X } from 'obj.Layout'
+import Btn from 'atm.Btn'
 import Ancestor from 'atm.Ancestor'
+import Avatar from 'atm.Avatar'
 import Tree from './components/Tree'
 import NodeInputModal from './components/NodeInputModal'
 
-const AncestorBlock = ({ label= '', onSelect, ...rest }) =>
+const sizing = {
+  sm: '60',
+  md: '70',
+  lg: '80'
+}
+
+const AncestorBlock = ({ label= '', onSelect, size, ...rest }) =>
   <div style={{textAlign: 'center', width: '70px'}}>
     <div onClick={onSelect.bind(null, label)}>
-      <Ancestor { ...rest } />
+      <Avatar size={sizing[size]} { ...rest } />
     </div>
-    <span style={{display: 'block', marginTop: '2px', fontSize: '.9em'}}>
+    <span style={{display: 'block', marginTop: '2px', fontSize: '.8em'}}>
       {label}
     </span>
   </div>
 
-const SubmitTreeUi = ({modalData, onNodeSelect}) =>
-  <div>
+const determineDefault = (gender) => (gender === 'male' || gender === 'female')
+  ? `/assets/icons/${gender}.svg`
+  : `/assets/icons/male.svg`
+
+const setUserAvatar = ({picture = {}, gender}) => picture.url
+  ? picture.url
+  : determineDefault(gender)
+
+const SubmitTreeUi = ({modalData, onNodeSelect, user}) =>
+  <div className={style.root}>
     <NodeInputModal { ...modalData } />
     <header className={style.header}>
+      <div className={style.banner}>
+        <img src='/images/stars.svg' />
+      </div>
       <h1 className={style.h1}>Add Your Family</h1>
     </header>
-    <Y y>
+    <Y y className={style.tree}>
       <Tree
         top={
-          <AncestorBlock gender='male' discovered={true} onSelect={onNodeSelect}/>
+          <AncestorBlock label={user.first_name} src={setUserAvatar(user)} size='lg' onSelect={onNodeSelect}/>
         }
         left={
           <Tree
-            top={<AncestorBlock label='Father' gender='male' discovered={true} onSelect={onNodeSelect}/>}
-            left={<AncestorBlock label='Paternal Grandfather' gender='male' discovered={true} onSelect={onNodeSelect}/>}
-            right={<AncestorBlock label='Paternal Grandmother' gender='female' discovered={false} onSelect={onNodeSelect}/>}
+            top={<AncestorBlock label='Father' src='/assets/icons/male.svg' size='md' onSelect={onNodeSelect}/>}
+            left={<AncestorBlock label='Paternal Grandfather' src='/assets/icons/male.svg' size='sm' onSelect={onNodeSelect}/>}
+            right={<AncestorBlock label='Paternal Grandmother' src='/assets/icons/female.svg' size='sm' onSelect={onNodeSelect}/>}
           />
         }
         right={
           <Tree
-            top={<AncestorBlock label='Mother' gender='female' discovered={true} onSelect={onNodeSelect}/>}
-            left={<AncestorBlock label='Maternal Grandfather' gender='male' discovered={true} onSelect={onNodeSelect}/>}
-            right={<AncestorBlock label='Maternal Grandmother' gender='female' discovered={false} onSelect={onNodeSelect}/>}
+            top={<AncestorBlock label='Mother' src='/assets/icons/female.svg' size='md' onSelect={onNodeSelect}/>}
+            left={<AncestorBlock label='Maternal Grandfather' src='/assets/icons/male.svg' size='sm' onSelect={onNodeSelect}/>}
+            right={<AncestorBlock label='Maternal Grandmother' src='/assets/icons/female.svg' size='sm' onSelect={onNodeSelect}/>}
           />
         }
       />
+    </Y>
+    <Y y tag='footer'>
+      <Btn copy='See Your Relation' theme='rust' />
     </Y>
   </div>
 
 SubmitTreeUi.propTypes = {}
 
 const SubmitTree = React.createClass({
+
+  propTypes: {
+    user: PropTypes.object.isRequired
+  },
 
   getInitialState () {
     return {
@@ -99,10 +125,10 @@ const SubmitTree = React.createClass({
       onNodeUpdate
     }
 
-    return <SubmitTreeUi { ...{ modalData, onNodeSelect } } />
+    return <SubmitTreeUi { ...{ modalData, onNodeSelect, ...this.props } } />
   }
 })
 
-export default connect(state => ({
-
+export default connect(({session}) => ({
+  user: session.user
 }))(SubmitTree)

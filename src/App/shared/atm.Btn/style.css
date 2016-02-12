@@ -11,9 +11,13 @@
   text-transform: uppercase;
   font-size: 13px;
 
-  display: flex;
-  align-items: center;
+  
 }
+
+  .iconCopy {
+    display: flex;
+    align-items: center;
+  }
 
   .aqua {
     composes: base;
@@ -25,6 +29,12 @@
     composes: base;
 
     background-color: var(--clr-facebook-blue);
+  }
+
+  .rust {
+    composes: base;
+
+    background-color: var(--clr-rust);
   }
 
 .icon {

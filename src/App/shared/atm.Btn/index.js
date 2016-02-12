@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 import CSSModules from 'react-css-modules'
 
 const Btn = ({copy, theme = 'aqua', iconSrc, ...props}) => (
-  <button { ...props } styleName={theme}>
+  <button { ...props } styleName={`${theme}${iconSrc ? ' iconCopy' : ''}`}>
     {
       iconSrc
       ? <img
@@ -21,11 +21,12 @@ Btn.propTypes = {
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   children: PropTypes.node,
-  theme: PropTypes.oneOf(['aqua', 'facebook']),
+  theme: PropTypes.oneOf(['aqua', 'facebook', 'rust']),
   type: PropTypes.string,
   iconSrc: PropTypes.string
 }
 
 export default CSSModules(Btn, style, {
-  errorWhenNotFound: false
+  errorWhenNotFound: false,
+  allowMultiple: true
 })

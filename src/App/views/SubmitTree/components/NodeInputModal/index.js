@@ -17,7 +17,7 @@ const modalStyles = {
     padding: '40px'
   },
   overlay: {
-    backgroundColor: 'rgba(0,0,0,.8)'
+    backgroundColor: 'rgba(30,49,65,.8)'
   }
 }
 
@@ -43,7 +43,7 @@ const NodeFormUi = ({name, birthday, location, onInputChange, onSave}) =>
         input={<Input type='text' value={name} onChange={onInputChange.bind(null, 'location')} />}
       />
     </fieldset>
-    <Btn copy='Save' onClick={onSave} />
+    <Btn copy='Add Person' onClick={onSave} />
   </form>
 
 const NodeForm = React.createClass({
