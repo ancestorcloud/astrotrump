@@ -6,8 +6,8 @@ const Avatar = ({ src, size }) => {
     <div
       className={style.Avatar}
       style={{
-        width: size,
-        height: size,
+        width: `${size}px`,
+        height: `${size}px`,
         backgroundImage: `url('${src}')`
       }}
     />
