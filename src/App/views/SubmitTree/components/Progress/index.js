@@ -7,7 +7,7 @@ const normalizePercent = (p) => (p < 0)
   ? 0
   : (p > 100)
   ? 100
-  : p
+  : p.toFixed(0)
 
 const setStyle = (p) => ({
   width: `${normalizePercent(p)}%`
@@ -16,7 +16,11 @@ const setStyle = (p) => ({
 const ProgressBar = ({percent = 0, height = '50px'}) =>
   <div styleName='outer' style={{height}}>
     <X x y styleName='inner' style={setStyle(percent)}>
-      <div styleName='progress'>{normalizePercent(percent)}%</div>
+      <div styleName='progress'>{
+        (percent > 10)
+        ? `${normalizePercent(percent)}%`
+        : <span style={{paddingLeft: '40px'}}>{normalizePercent(percent)}%</span>
+      }</div>
     </X>
   </div>
 

@@ -9,6 +9,7 @@ const findRelationshipData = (relation, data) => {
   let relationData
 
   data.some((item) => {
+    console.log(item, relation)
     if (item.relationship === relation) {
       relationData = item
       return
@@ -26,9 +27,9 @@ const extractFbData = (user, data) => ({
   }
 })
 
-const relationDataReducer = relation => (state, { payload: user }) => {
-  const relationData = findRelationshipData(relation, user.family.data)
-  console.log(state, relation)
+const relationDataReducer = (state, { payload: user }) => {
+  const relationData = findRelationshipData(state.id, user.family.data)
+  console.log(relationData, state.id)
   if (!relationData) return state
 
   return {
@@ -56,6 +57,7 @@ const updateTreeNode = (state, { payload: { nodeName, data } }) => (nodeName ===
 
 const initialDefaultState = {
   fieldsComplete: false,
+  highlightMissingData: false,
   pictureUrl: '',
   data: {
     fullName: '',
@@ -89,7 +91,7 @@ export const father = createReducer({
 }, {
   [UPDATE_TREE_NODE]: updateTreeNode,
 
-  // [USER_UPDATE_FACEBOOK_DATA]: (state, { payload: user }) => relationDataReducer('father')
+  [USER_UPDATE_FACEBOOK_DATA]: relationDataReducer
 })
 
 export const mother = createReducer({
@@ -98,9 +100,9 @@ export const mother = createReducer({
   gender: 'female',
   ...initialDefaultState
 }, {
-  [UPDATE_TREE_NODE]: updateTreeNode
+  [UPDATE_TREE_NODE]: updateTreeNode,
 
-  // [USER_UPDATE_FACEBOOK_DATA]: (state, { payload: user }) => relationDataReducer('mother')
+  [USER_UPDATE_FACEBOOK_DATA]: relationDataReducer
 })
 
 export const pFather = createReducer({

@@ -6,6 +6,7 @@ import { transitionTo } from 'App/state/routing/actions'
 
 import Avatar from 'atm.Avatar'
 import Btn from 'atm.Btn'
+import Footer from 'org.Footer'
 import StepList from './components/StepList'
 
 import { updateAuthResponse, updateFacebookUserData } from 'App/state/session/actions'
@@ -32,10 +33,10 @@ const statusChangeCallback = (response /* 1 */, updateAuthResponse, updateFacebo
  */
 window.fbAsyncInit = () => {
   window.FB.init({
-    appId: '730729143612491',
+    appId: '1427298800906536',
     cookie: true,   /* 1 */
     xfbml: true,    /* 2 */
-    version: 'v2.2'
+    version: 'v2.5'
   })
 
   window.FB.getLoginStatus((response) => {
@@ -53,7 +54,7 @@ const login = (updateAuthResponse, updateFacebookUserData) => {
       statusChangeCallback(response, updateAuthResponse, updateFacebookUserData)
     })
   }, {
-    scope: 'public_profile,user_relationships,email,user_birthday',
+    scope: 'public_profile,user_relationships,email',
     return_scopes: true
   })
 }
@@ -119,19 +120,7 @@ const Landing = ({
           {bannerImages}
         </div>
       </div>
-      <div className={style.heroFooter}>
-        <span>built with</span>
-        &nbsp;
-        <img
-          src='/images/heart.svg'
-          style={{
-            display: 'inline-block',
-            width: '20px'
-          }}
-        />
-        &nbsp;
-        <span>by AncestorCloud</span>
-      </div>
+      <Footer />
     </div>
   )
 }

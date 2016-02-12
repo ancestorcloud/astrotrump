@@ -22,7 +22,7 @@
   padding: 18px 0;
 }
 
-.h1 {
+.heading {
   color: var(--clr-navy);
 }
 
@@ -39,5 +39,10 @@
 .footer {
   composes: container;
   composes: center;
+  padding: 4px;
   text-align: center;
+}
+
+.footer > * {
+  margin: 8px 0;
 }

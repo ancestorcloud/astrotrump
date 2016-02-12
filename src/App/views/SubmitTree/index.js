@@ -5,6 +5,7 @@ import { updateTreeNode } from 'App/state/actions'
 import { Y, X } from 'obj.Layout'
 import Btn from 'atm.Btn'
 import Avatar from 'atm.Avatar'
+import Footer from 'org.Footer'
 import Tree from './components/Tree'
 import NodeInputModal from './components/NodeInputModal'
 import Progress from './components/Progress'
@@ -52,7 +53,7 @@ const AncestorBlock = ({ data, onSelect, size }) =>
     </span>
   </div>
 
-const SubmitTreeUi = ({modalData, onNodeSelect, treeData: {
+const SubmitTreeUi = ({modalData, onNodeSelect, progress, treeData: {
   user,
   father,
   mother,
@@ -88,15 +89,31 @@ const SubmitTreeUi = ({modalData, onNodeSelect, treeData: {
       </X>
     </Y>
     <Y y tag='footer' className={style.footer}>
-      <Progress percent={50} height='25px' />
+      <div style={{width: '100%'}}>
+        <h4>Matching Confidence</h4>
+        <Progress percent={progress} height='25px' />
+      </div>
 
       <span>Add more information about your family to better match</span>
 
       <Btn copy='See Your Relation' theme='rust' style={{padding: '15px', width: '60%'}} />
     </Y>
+    <Footer />
   </div>
 
 SubmitTreeUi.propTypes = {}
+
+/**
+ * 1. add 1 to the total because we can have have 100% confidence
+ */
+const calculateProgress = (treeData) => {
+  const treeNodes = Object.keys(treeData)
+  const progress = treeNodes
+    .reduce((prev, curr) =>
+      prev + Number(treeData[curr].fieldsComplete),
+    0) / (treeNodes.length + 1)
+  return progress * 100
+}
 
 const SubmitTree = React.createClass({
 
@@ -138,6 +155,7 @@ const SubmitTree = React.createClass({
     const { props, state, onNodeSelect, onNodeUpdate, onFormClose } = this
     const { modalIsOpen, currentNode } = state
     const { treeData } = props
+    const progress = calculateProgress(treeData)
     const nodeData = treeData[currentNode]
     const modalData = {
       modalIsOpen,
@@ -147,7 +165,7 @@ const SubmitTree = React.createClass({
       onNodeUpdate
     }
 
-    return <SubmitTreeUi { ...{ modalData, onNodeSelect, treeData } } />
+    return <SubmitTreeUi { ...{ modalData, onNodeSelect, treeData, progress } } />
   }
 })
 

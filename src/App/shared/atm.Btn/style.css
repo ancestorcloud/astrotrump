@@ -19,10 +19,10 @@
     align-items: center;
   }
 
-  .aqua {
+  .navy {
     composes: base;
 
-    background-color: var(--clr-cyan);
+    background-color: var(--clr-navy);
   }
 
   .facebook {
