@@ -11,7 +11,7 @@ const AncestorBlock = ({ label= '', onSelect, ...rest }) =>
     <div onClick={onSelect.bind(null, label)}>
       <Ancestor { ...rest } />
     </div>
-    <span style={{display: 'block', marginTop: '2px'}}>
+    <span style={{display: 'block', marginTop: '2px', fontSize: '.9em'}}>
       {label}
     </span>
   </div>
@@ -30,15 +30,15 @@ const SubmitTreeUi = ({modalData, onNodeSelect}) =>
         left={
           <Tree
             top={<AncestorBlock label='Father' gender='male' discovered={true} onSelect={onNodeSelect}/>}
-            left={<AncestorBlock label='Paternal Father' gender='male' discovered={true} onSelect={onNodeSelect}/>}
-            right={<AncestorBlock label='Paternal Mother' gender='female' discovered={false} onSelect={onNodeSelect}/>}
+            left={<AncestorBlock label='Paternal Grandfather' gender='male' discovered={true} onSelect={onNodeSelect}/>}
+            right={<AncestorBlock label='Paternal Grandmother' gender='female' discovered={false} onSelect={onNodeSelect}/>}
           />
         }
         right={
           <Tree
             top={<AncestorBlock label='Mother' gender='female' discovered={true} onSelect={onNodeSelect}/>}
-            left={<AncestorBlock label='Maternal Father' gender='male' discovered={true} onSelect={onNodeSelect}/>}
-            right={<AncestorBlock label='Maternal Mother' gender='female' discovered={false} onSelect={onNodeSelect}/>}
+            left={<AncestorBlock label='Maternal Grandfather' gender='male' discovered={true} onSelect={onNodeSelect}/>}
+            right={<AncestorBlock label='Maternal Grandmother' gender='female' discovered={false} onSelect={onNodeSelect}/>}
           />
         }
       />

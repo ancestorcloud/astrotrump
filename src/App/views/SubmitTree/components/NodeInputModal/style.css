@@ -1,0 +1,29 @@
+.heading {
+  text-align: center;
+  margin: 0;
+}
+
+.fieldset {
+  padding: 20px 0;
+  border: none;
+}
+
+.label {
+  text-indent: 8px;
+}
+
+.inputField {
+  display: block;
+}
+
+.inputField:nth-child(n+2) {
+  margin-top: 8px;
+}
+
+.inputField > * {
+  display: block;
+}
+
+.inputField > input {
+  width: 100%;
+}

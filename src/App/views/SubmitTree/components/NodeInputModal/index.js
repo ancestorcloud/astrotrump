@@ -1,6 +1,8 @@
+import style from './style'
 import React, { PropTypes } from 'react'
 import Modal from 'react-modal'
 import Btn from 'atm.Btn'
+import Input from 'atm.Input'
 
 const modalStyles = {
   content: {
@@ -10,27 +12,37 @@ const modalStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    maxWidth: '400px'
+    maxWidth: '400px',
+    minWidth: '320px',
+    padding: '40px'
   },
   overlay: {
     backgroundColor: 'rgba(0,0,0,.8)'
   }
 }
 
+const InputField = ({label, input}) =>
+  <label className={style.inputField}>
+    <span className={style.label}>{label}</span>
+    {input}
+  </label>
+
 const NodeFormUi = ({name, birthday, location, onInputChange, onSave}) =>
   <form>
-    <label>
-      Full Name
-      <input type='text' value={name} onChange={onInputChange.bind(null, 'name')} />
-    </label>
-    <label>
-      Birth Date
-      <input type='text' value={birthday} onChange={onInputChange.bind(null, 'birthday')} />
-    </label>
-    <label>
-      Birth Location
-      <input type='text' value={location} onChange={onInputChange.bind(null, 'location')} />
-    </label>
+    <fieldset className={style.fieldset}>
+      <InputField className={style.inputField}
+        label='Full name'
+        input={<Input autofocus={true} type='text' value={name} onChange={onInputChange.bind(null, 'name')} />}
+      />
+      <InputField className={style.inputField}
+        label='Birth date'
+        input={<Input type='text' value={name} onChange={onInputChange.bind(null, 'birthday')} />}
+      />
+      <InputField className={style.inputField}
+        label='Birth location'
+        input={<Input type='text' value={name} onChange={onInputChange.bind(null, 'location')} />}
+      />
+    </fieldset>
     <Btn copy='Save' onClick={onSave} />
   </form>
 
@@ -73,7 +85,7 @@ const ReactInputModal = ({modalIsOpen, onFormClose, formData, nodeTitle, onNodeU
     onRequestClose={onFormClose}
     style={modalStyles} >
 
-    <h2>{nodeTitle}</h2>
+    <h2 className={style.heading}>{nodeTitle}</h2>
     <NodeForm name={nodeTitle} data={formData} onSubmit={onNodeUpdate} />
   </Modal>
 
