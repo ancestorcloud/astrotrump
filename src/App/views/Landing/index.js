@@ -30,7 +30,6 @@ const statusChangeCallback = (response /* 1 */, updateAuthResponse, updateFacebo
       updateFacebookUserData({ picture: response.data })
     })
   }
-  transitionTo('/tree')
 }
 
 /**
