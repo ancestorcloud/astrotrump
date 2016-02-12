@@ -53,7 +53,7 @@ const login = (updateAuthResponse, updateFacebookUserData) => {
       statusChangeCallback(response, updateAuthResponse, updateFacebookUserData)
     })
   }, {
-    scope: 'user_relationships,email,user_birthday',
+    scope: 'public_profile,user_relationships,email,user_birthday',
     return_scopes: true
   })
 }
