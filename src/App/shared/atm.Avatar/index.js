@@ -16,7 +16,7 @@ const Avatar = ({ src, size }) => {
 
 Avatar.propTypes = {
   src: PropTypes.string,
-  size: PropTypes.oneOf([150])
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }
 
 export default Avatar

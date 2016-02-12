@@ -27,20 +27,20 @@ const InputField = ({label, input}) =>
     {input}
   </label>
 
-const NodeFormUi = ({name, birthday, location, onInputChange, onSave}) =>
+const NodeFormUi = ({fullName, birthday, location, onInputChange, onSave}) =>
   <form>
     <fieldset className={style.fieldset}>
       <InputField className={style.inputField}
         label='Full name'
-        input={<Input autofocus={true} type='text' value={name} onChange={onInputChange.bind(null, 'name')} />}
+        input={<Input autofocus={true} type='text' value={fullName} onChange={onInputChange.bind(null, 'fullName')} />}
       />
       <InputField className={style.inputField}
         label='Birth date'
-        input={<Input type='text' value={name} onChange={onInputChange.bind(null, 'birthday')} />}
+        input={<Input type='text' value={birthday} onChange={onInputChange.bind(null, 'birthday')} />}
       />
       <InputField className={style.inputField}
         label='Birth location'
-        input={<Input type='text' value={name} onChange={onInputChange.bind(null, 'location')} />}
+        input={<Input type='text' value={location} onChange={onInputChange.bind(null, 'location')} />}
       />
     </fieldset>
     <Btn copy='Add Person' onClick={onSave} />
@@ -49,14 +49,14 @@ const NodeFormUi = ({name, birthday, location, onInputChange, onSave}) =>
 const NodeForm = React.createClass({
 
   propTypes: {
-    data: PropTypes.object,
+    form: PropTypes.object,
     onSubmit: PropTypes.func,
     name: PropTypes.string
   },
 
   getInitialState () {
     return {
-      ...this.props.data
+      ...this.props.form.data
     }
   },
 
@@ -68,9 +68,10 @@ const NodeForm = React.createClass({
     })
   },
 
-  onSave () {
-    const { onSubmit, name } = this.props
-    onSubmit(name, this.state)
+  onSave (e) {
+    e.preventDefault()
+    const { onSubmit, form } = this.props
+    onSubmit(form.id, this.state)
   },
 
   render () {
@@ -79,14 +80,14 @@ const NodeForm = React.createClass({
   }
 })
 
-const ReactInputModal = ({modalIsOpen, onFormClose, formData, nodeTitle, onNodeUpdate}) =>
+const ReactInputModal = ({modalIsOpen, onFormClose, formData = {}, nodeTitle, onNodeUpdate}) =>
   <Modal
     isOpen={modalIsOpen}
     onRequestClose={onFormClose}
     style={modalStyles} >
 
-    <h2 className={style.heading}>{nodeTitle}</h2>
-    <NodeForm name={nodeTitle} data={formData} onSubmit={onNodeUpdate} />
+    <h2 className={style.heading}>{formData.title}</h2>
+    <NodeForm form={formData} onSubmit={onNodeUpdate} />
   </Modal>
 
 export default ReactInputModal
