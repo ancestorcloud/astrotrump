@@ -4,7 +4,7 @@ import style from './style'
 const Avatar = ({ src, size }) => {
   return (
     <div
-      className={style.wrapper}
+      className={style.Avatar}
       style={{
         width: size,
         height: size,
