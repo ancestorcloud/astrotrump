@@ -1,0 +1,62 @@
+@import 'settings.colors';
+
+:root {
+  --avatarOverlap: 64px;
+  --avatarOverlap-small: 32px;
+  --circleSize: 200px;
+  --circleSize-small: 100px;
+  --degreeCircleSize: 100px;
+  --degreeCircleOverlap: 36px;
+}
+
+.wrapper {
+  padding-bottom: calc(var(--degreeCircleSize) - var(--degreeCircleOverlap));
+  display: flex;
+  align-items: center;
+}
+
+  .wrapper-small {
+    composes: wrapper;
+  }
+
+  .wrapper > * {
+    z-index: 2;
+  }
+
+  .circleWrapper {
+    position: relative;
+    z-index: 1;
+    margin: 0 calc(-1 * var(--avatarOverlap));
+    width: var(--circleSize);
+  }
+
+    .wrapper-small .circleWrapper {
+      margin: 0 calc(-1 * var(--avatarOverlap-small));
+      width: var(--circleSize-small);
+    }
+
+    .circle {
+      width: 100%;
+    }
+
+    .degreeWrapper {
+      position: absolute;
+      top: calc(var(--circleSize) - var(--degreeCircleOverlap));
+      left: 50%;
+      margin-left: -50px;
+      border-radius: 50%;
+      border: 2px solid white;
+      background: var(--clr-cyan);
+      width: var(--degreeCircleSize);
+      height: var(--degreeCircleSize);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+      .degree {
+        font-size: 50px;
+        font-weight: bold;
+        color: white;
+      }

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import style from './style'
 
-import TrumpConnection from './components/TrumpConnection'
+import TrumpConnection from 'mol.TrumpConnection'
 import Footer from 'org.Footer'
 import Btn from 'atm.Btn'
 
@@ -11,14 +11,13 @@ import Btn from 'atm.Btn'
  * 2. get number in unit column
  */
 const getSuffix = (number) => {
+  const suffixMap = {
+    1: 'st',
+    2: 'nd',
+    3: 'rd'
+  }
   const unit = number - (Math.round(number / 10) * 10 /* 1 */) /* 2 */
-  return unit === 1
-  ? 'st'
-  : unit === 2
-  ? 'nd'
-  : unit === 3
-  ? 'rd'
-  : 'th'
+  return suffixMap[unit] || 'th'
 }
 
 const Result = ({
@@ -34,6 +33,7 @@ const Result = ({
       <TrumpConnection
         avatarSrc={user && user.picture && user.picture.data && user.picture.data.url}
         degrees={degrees}
+        size='big'
       />
     </div>
     <div className={style.explainer}>
