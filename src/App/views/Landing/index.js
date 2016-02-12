@@ -6,6 +6,7 @@ import { transitionTo } from 'App/state/routing/actions'
 
 import Avatar from 'atm.Avatar'
 import Btn from 'atm.Btn'
+import Footer from 'org.Footer'
 import StepList from './components/StepList'
 
 import { updateAuthResponse, updateFacebookUserData } from 'App/state/session/actions'
@@ -119,19 +120,7 @@ const Landing = ({
           {bannerImages}
         </div>
       </div>
-      <div className={style.heroFooter}>
-        <span>built with</span>
-        &nbsp;
-        <img
-          src='/images/heart.svg'
-          style={{
-            display: 'inline-block',
-            width: '20px'
-          }}
-        />
-        &nbsp;
-        <span>by AncestorCloud</span>
-      </div>
+      <Footer />
     </div>
   )
 }
