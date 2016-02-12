@@ -86,6 +86,10 @@ const Landing = ({
   return (
     <div className={style.hero}>
       <div className={style.heroMain}>
+        <img
+          height='35'
+          src='/images/stars.svg'
+        />
         <h1 className={style.siteTitle}>Cousin Trump</h1>
         <div className={style.trumpWrapper}>
           <Avatar
