@@ -36,6 +36,7 @@
       text-transform: uppercase;
       text-align: center;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      font-family: 'Martel';
     }
 
       @media (width <= 620px) {
@@ -55,7 +56,7 @@
     }
 
   .heroBanner {
-    background: #F3E8D3;
+    background: var(--clr-cream);
     height: 80px;
     overflow: hidden;
   }
@@ -70,7 +71,7 @@
     }
 
   .heroFooter {
-    background: #1A374B;
+    background: var(--clr-navy);
     width: 100%;
     height: 80px;
     color: #fff;
