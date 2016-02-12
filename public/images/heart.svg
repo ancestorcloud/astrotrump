@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="17px" height="16px" viewBox="0 0 17 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.5.2 (25235) - http://www.bohemiancoding.com/sketch -->
+    <title>heart</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-672.000000, -888.000000)" fill="#0AA7C6">
+            <g id="Group-4" sketch:type="MSLayerGroup" transform="translate(310.000000, 823.000000)">
+                <g id="heart" transform="translate(362.000000, 65.000000)" sketch:type="MSShapeGroup">
+                    <path d="M8.5,2.47272727 C5.66666667,-1.96363636 0.141666667,0.945454545 0.141666667,5.01818182 C0.141666667,8.14545455 4.95833333,10.9090909 8.5,15.8545455 C12.0416667,10.9090909 16.8583333,8.14545455 16.8583333,5.01818182 C16.8583333,0.945454545 11.475,-1.96363636 8.5,2.47272727 L8.5,2.47272727 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

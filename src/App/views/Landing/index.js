@@ -86,6 +86,10 @@ const Landing = ({
   return (
     <div className={style.hero}>
       <div className={style.heroMain}>
+        <img
+          height='35'
+          src='/images/stars.svg'
+        />
         <h1 className={style.siteTitle}>Cousin Trump</h1>
         <div className={style.trumpWrapper}>
           <Avatar
@@ -116,7 +120,17 @@ const Landing = ({
         </div>
       </div>
       <div className={style.heroFooter}>
-        <span>{'built with <3 by AncestorCloud'}</span>
+        <span>built with</span>
+        &nbsp;
+        <img
+          src='/images/heart.svg'
+          style={{
+            display: 'inline-block',
+            width: '20px'
+          }}
+        />
+        &nbsp;
+        <span>by AncestorCloud</span>
       </div>
     </div>
   )
