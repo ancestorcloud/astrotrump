@@ -2,8 +2,11 @@ import style from './style'
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { getStore } from 'redux.store'
+import { transitionTo } from 'App/state/routing/actions'
 
-import { Y } from 'obj.Layout'
+import Avatar from 'atm.Avatar'
+import Btn from 'atm.Btn'
+import StepList from './components/StepList'
 
 import { updateAuthResponse, updateFacebookUserData } from 'App/state/session/actions'
 
@@ -27,6 +30,7 @@ const statusChangeCallback = (response /* 1 */, updateAuthResponse, updateFacebo
       updateFacebookUserData({ picture: response.data })
     })
   }
+  transitionTo('/tree')
 }
 
 /**
@@ -53,7 +57,6 @@ window.fbAsyncInit = () => {
 const login = (updateAuthResponse, updateFacebookUserData) => {
   window.FB.login(() => {
     window.FB.getLoginStatus((response) => {
-      console.log('response: ', response)
       statusChangeCallback(response, updateAuthResponse, updateFacebookUserData)
     })
   }, {
@@ -62,36 +65,78 @@ const login = (updateAuthResponse, updateFacebookUserData) => {
   })
 }
 
+const bannerImageNames = [
+  'ballot.svg',
+  'capital.svg',
+  'elephant.svg',
+  'merica.svg',
+  'podium.svg',
+  'vote.svg'
+]
+
+const bannerImages = [
+  ...bannerImageNames,
+  ...bannerImageNames,
+  ...bannerImageNames,
+  ...bannerImageNames
+].map((imageName) => <img src={`/images/bannerImages/${imageName}`} />)
+
 const Landing = ({
   session,
 
   updateAuthResponse,
-  updateFacebookUserData
-}) => (
-  <Y>
-    <h1>Landing</h1>
-    <div>
-      {
-        session.status === 'connected'
-        ? <pre>{JSON.stringify(session, null, 2)}</pre>
-        : (
-          <a
-            style={{color: '#00f'}}
-            onClick={login.bind(null, updateAuthResponse, updateFacebookUserData)}
-          >Login with Facebook</a>
-        )
-      }
+  updateFacebookUserData,
+  transitionTo
+}) => {
+  // if (session.status === 'connected') transitionTo('tree')
+
+  return (
+    <div className={style.hero}>
+      <div className={style.heroMain}>
+        <h1 className={style.siteTitle}>Cousin Trump</h1>
+        <div className={style.trumpWrapper}>
+          <Avatar
+            src='/images/trump.jpg'
+            size={150}
+          />
+        </div>
+        <div className={style.description}>See how closely related you are to Donald Trump</div>
+        <a onClick={login.bind(null, updateAuthResponse, updateFacebookUserData)}>
+          <Btn
+            theme='facebook'
+            copy='Continue with Facebook'
+          />
+        </a>
+        <div style={{width: '100%', maxWidth: '700px'}}>
+          <StepList
+            steps={[
+              'Click the button',
+              'Add your family',
+              'Discover the truth'
+            ]}
+          />
+        </div>
+      </div>
+      <div className={style.heroBanner}>
+        <div className={style.heroBannerImagesWrapper}>
+          {bannerImages}
+        </div>
+      </div>
+      <div className={style.heroFooter}>
+        <span>{'built with <3 by AncestorCloud'}</span>
+      </div>
     </div>
-  </Y>
-)
+  )
+}
 
 Landing.propTypes = {
   session: PropTypes.object,
 
   updateAuthResponse: PropTypes.func,
-  updateFacebookUserData: PropTypes.func
+  updateFacebookUserData: PropTypes.func,
+  transitionTo: PropTypes.func
 }
 
-export default connect(({session}) => { console.log('session: ', session); return {
+export default connect(({session}) => ({
   session
-}}, { updateAuthResponse, updateFacebookUserData })(Landing)
+}), { updateAuthResponse, updateFacebookUserData, transitionTo })(Landing)

@@ -1,5 +1,5 @@
 {
-  "name": "react-scaffold",
+  "name": "astrotrump",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
@@ -47,5 +47,11 @@
     "require": [
       "babel-core/register"
     ]
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "rules": {
+      "strict": 0
+    }
   }
 }

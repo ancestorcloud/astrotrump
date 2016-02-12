@@ -13,4 +13,5 @@ body,
 #app {
   height: 100%;
   font-family: arial;
+  color: var(--clr-darkest-grey);
 }

@@ -2,9 +2,8 @@ import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 import App from 'App'
 import Landing from 'App/views/Landing'
-import Tree from 'App/views/Tree'
+import SubmitTree from 'App/views/SubmitTree'
 import Result from 'App/views/Result'
-
 import { makeAsyncScript } from '../App/shared/hoc.asyncScriptLoader'
 
 const getRoute = ({ index, path, component, children = [] }, key) =>
@@ -24,7 +23,7 @@ const routes = getRoute(
       globalName: 'FB'
     }) },
     { path: 'landing/:person', component: Landing },
-    { path: 'tree', component: Tree },
+    { path: 'tree', component: SubmitTree },
     { path: 'result', component: Result }
   ] }
 )

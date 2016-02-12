@@ -1,0 +1,37 @@
+@import 'settings.colors';
+
+.base {
+  position: relative;
+  composes: btn-normalized from 'App/style/components';
+  padding: 12px;
+  max-width: 300px;
+  width: 100%;
+  border-radius: 7px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 13px;
+
+  display: flex;
+  align-items: center;
+}
+
+  .aqua {
+    composes: base;
+
+    background-color: var(--clr-cyan);
+  }
+
+  .facebook {
+    composes: base;
+
+    background-color: var(--clr-facebook-blue);
+  }
+
+.icon {
+  width: 32px;
+  height: 32px;
+}
+
+.copy {
+  white-space: nowrap;
+}
