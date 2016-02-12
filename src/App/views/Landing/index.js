@@ -20,14 +20,8 @@ const statusChangeCallback = (response /* 1 */, updateAuthResponse, updateFacebo
   updateAuthResponse(response.authResponse, response.status)
 
   if (response.status === 'connected') { /* 2 */
-    window.FB.api('/me', (response) => {
+    window.FB.api('/me?fields=name,gender,birthday,location,picture.type(large),family{name,birthday,bio,picture.type(large){url,is_silhouette}}', (response) => {
       updateFacebookUserData(response)
-    })
-    window.FB.api('/me/family', (response) => {
-      updateFacebookUserData({ family: response.data })
-    })
-    window.FB.api('/me/picture', (response) => {
-      updateFacebookUserData({ picture: response.data })
     })
   }
 }
@@ -59,7 +53,7 @@ const login = (updateAuthResponse, updateFacebookUserData) => {
       statusChangeCallback(response, updateAuthResponse, updateFacebookUserData)
     })
   }, {
-    scope: 'user_relationships,email',
+    scope: 'public_profile,user_relationships,email,birthday',
     return_scopes: true
   })
 }
