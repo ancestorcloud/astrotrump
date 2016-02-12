@@ -7,6 +7,7 @@ import Btn from 'atm.Btn'
 import Avatar from 'atm.Avatar'
 import Tree from './components/Tree'
 import NodeInputModal from './components/NodeInputModal'
+import Progress from './components/Progress'
 
 const sizing = {
   sm: '60',
@@ -18,16 +19,35 @@ const determineDefault = (gender) => (gender === 'male' || gender === 'female')
   ? `/assets/icons/${gender}.svg`
   : `/assets/icons/male.svg`
 
-const setUserAvatar = (url, gender) => url
-  ? url
-  : determineDefault(gender)
+const setUserAvatarProps = ({pictureUrl, gender, fieldsComplete}) => {
+
+  let src = pictureUrl
+  let showAlert = false
+  let showBorder = true
+
+  if (!pictureUrl && !fieldsComplete) {
+    src = '/assets/icons/plus.svg'
+    showBorder = false
+  } else if (pictureUrl && !fieldsComplete) {
+    showAlert = true
+  } else if (!pictureUrl && fieldsComplete) {
+    src = determineDefault(gender)
+    showBorder = false
+  }
+
+  return {
+    src,
+    showAlert,
+    showBorder
+  }
+}
 
 const AncestorBlock = ({ data, onSelect, size }) =>
   <div style={{textAlign: 'center', maxWidth: sizing[size]}}>
-    <div onClick={onSelect.bind(null, data.id)}>
-      <Avatar size={sizing[size]} src={setUserAvatar(data.pictureUrl, data.gender)} />
+    <div className={style.nodeWrapper} onClick={onSelect.bind(null, data.id)}>
+      <Avatar size={sizing[size]} { ...setUserAvatarProps(data) } />
     </div>
-    <span style={{display: 'block', marginTop: '2px', fontSize: '.5em'}}>
+    <span style={{display: 'block', marginTop: '2px', fontSize: '1em'}}>
       {data.title}
     </span>
   </div>
@@ -41,7 +61,7 @@ const SubmitTreeUi = ({modalData, onNodeSelect, treeData: {
   mFather,
   mMother
 }}) =>
-  <div className={style.root}>
+  <div className={style.root} >
     <NodeInputModal { ...modalData } />
     <header className={style.header}>
       <div className={style.banner}>
@@ -49,12 +69,11 @@ const SubmitTreeUi = ({modalData, onNodeSelect, treeData: {
       </div>
       <h1 className={style.h1}>Add Your Family</h1>
     </header>
-    <Y y className={style.tree}>
+    <Y y tag='main' className={style.tree} >
 
-      <AncestorBlock data={user} size='lg' onSelect={onNodeSelect}
-      />
+      <AncestorBlock data={user} size='lg' onSelect={onNodeSelect} />
 
-      <div style={{textAlign: 'center'}}>
+      <X justify='space-between' style={{width: '100%'}}>
         <Tree
           top={<AncestorBlock data={father} size='md' onSelect={onNodeSelect}/>}
           left={<AncestorBlock data={pFather} size='sm' onSelect={onNodeSelect}/>}
@@ -66,10 +85,14 @@ const SubmitTreeUi = ({modalData, onNodeSelect, treeData: {
           left={<AncestorBlock data={mFather} size='sm' onSelect={onNodeSelect}/>}
           right={<AncestorBlock data={mMother} size='sm' onSelect={onNodeSelect}/>}
         />
-      </div>
+      </X>
     </Y>
-    <Y y tag='footer'>
-      <Btn copy='See Your Relation' theme='rust' />
+    <Y y tag='footer' className={style.footer}>
+      <Progress percent={50} height='25px' />
+
+      <span>Add more information about your family to better match</span>
+
+      <Btn copy='See Your Relation' theme='rust' style={{padding: '15px', width: '60%'}} />
     </Y>
   </div>
 

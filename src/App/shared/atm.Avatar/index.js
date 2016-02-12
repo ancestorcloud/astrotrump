@@ -1,10 +1,14 @@
 import React, {PropTypes} from 'react'
 import style from './style'
+import cn from 'classnames'
 
-const Avatar = ({ src, size }) => {
+const Avatar = ({ src, size, showBorder = true, showAlert }) => {
   return (
     <div
-      className={style.Avatar}
+      className={cn(style.Avatar, {
+        [style.showBorder]: showBorder,
+        [style.showAlert]: showAlert
+      })}
       style={{
         width: `${size}px`,
         height: `${size}px`,

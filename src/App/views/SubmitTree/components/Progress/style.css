@@ -1,0 +1,31 @@
+@import 'settings.colors';
+
+.rounding {
+  border-radius: 25px;
+}
+
+.inner {
+  composes: rounding;
+  background-color: var(--clr-cyan);
+  transition: .25s;
+  height: 100%;
+  text-align: center;
+}
+
+.outer {
+  composes: rounding;
+  background-color: var(--clr-dark-base);
+  width: 100%;
+  height: 50px;
+}
+
+.outer:hover .progress {
+  opacity: 1;
+}
+
+.progress {
+  color: white;
+  font-size: 200%;
+  opacity: 0;
+  transition: .25s;
+}
