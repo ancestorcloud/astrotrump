@@ -19,6 +19,10 @@
     composes: wrapper;
   }
 
+  .wrapper-noDegrees {
+    padding-bottom: 0;
+  }
+
   .wrapper > * {
     z-index: 2;
   }
@@ -33,6 +37,15 @@
     .wrapper-small .circleWrapper {
       margin: 0 calc(-1 * var(--avatarOverlap-small));
       width: var(--circleSize-small);
+    }
+
+    .circleWrapper-spin {
+      composes: circleWrapper;
+
+      animation-name: spin;
+      animation-duration: 4000ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
     }
 
     .circle {
@@ -60,3 +73,8 @@
         font-weight: bold;
         color: white;
       }
+
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
