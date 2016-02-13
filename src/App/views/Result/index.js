@@ -35,7 +35,7 @@ const Result = React.createClass({
       setTimeout(() => {
         console.log('setting degrees')
         this.setState({degreesPlaceholder: 27})
-      }, 8000)
+      }, 2000)
     }
 
     return (
@@ -43,12 +43,20 @@ const Result = React.createClass({
         <div className={style.main}>
           <img src='/images/stars.svg' />
           <h2>{degreesPlaceholder ? 'Well would you look at that?' : 'Calculating...'}</h2>
-          <TrumpConnection
-            avatarSrc={user && user.picture && user.picture.data && user.picture.data.url}
-            degrees={degreesPlaceholder}
-            size='big'
-            loading={!degreesPlaceholder}
-          />
+          <div style={{
+            /**
+             * 1. Compensates for padding on bottom of TrumpConnection when no degree
+             *    is present. This way there's no stutter when the padding is added.
+             */
+            paddingBottom: degreesPlaceholder ? '0' : '64px' /* 1 */
+          }}>
+            <TrumpConnection
+              avatarSrc={user && user.picture && user.picture.data && user.picture.data.url}
+              degrees={degreesPlaceholder}
+              size='big'
+              loading={!degreesPlaceholder}
+            />
+          </div>
         </div>
         {
           degreesPlaceholder
