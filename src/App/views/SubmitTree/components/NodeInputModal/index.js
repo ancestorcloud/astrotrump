@@ -21,26 +21,42 @@ const modalStyles = {
   }
 }
 
-const InputField = ({label, input}) =>
+const InputField = ({label, input, errorState}) =>
   <label className={style.inputField}>
-    <span className={style.label}>{label}</span>
-    {input}
+    <span className={errorState ? style.errorLabel : style.label}>{label}</span>
+    <Input { ...{ ...input, errorState } } />
   </label>
 
-const NodeFormUi = ({fullName, birthday, location, onInputChange, onSave}) =>
+const NodeFormUi = ({fullName, birthday, location, onInputChange, onSave, highlightMissingData = false}) =>
   <form>
     <fieldset className={style.fieldset}>
       <InputField className={style.inputField}
         label='Full name'
-        input={<Input autofocus={true} type='text' value={fullName} onChange={onInputChange.bind(null, 'fullName')} />}
+        input={{
+          autoFocus: true,
+          type: 'text',
+          value: fullName,
+          onChange: onInputChange.bind(null, 'fullName')
+        }}
+        errorState={!!(!fullName && highlightMissingData)}
       />
       <InputField className={style.inputField}
         label='Birth date'
-        input={<Input type='text' value={birthday} onChange={onInputChange.bind(null, 'birthday')} />}
+        input={{
+          type: 'text',
+          value: birthday,
+          onChange: onInputChange.bind(null, 'birthday')
+        }}
+        errorState={!!(!birthday && highlightMissingData)}
       />
       <InputField className={style.inputField}
         label='Birth location'
-        input={<Input type='text' value={location} onChange={onInputChange.bind(null, 'location')} />}
+        input={{
+          type: 'text',
+          value: location,
+          onChange: onInputChange.bind(null, 'location')
+        }}
+        errorState={!!(!location && highlightMissingData)}
       />
     </fieldset>
     <Btn copy='Add Person' onClick={onSave} />
@@ -75,8 +91,10 @@ const NodeForm = React.createClass({
   },
 
   render () {
-    const { onSave, onInputChange, state } = this
-    return <NodeFormUi { ...{ ...state, onSave, onInputChange } } />
+    const { onSave, onInputChange, state, props } = this
+    const { highlightMissingData } = props.form
+console.log(!!(state.fullName && highlightMissingData))
+    return <NodeFormUi { ...{ ...state, onSave, onInputChange, highlightMissingData } } />
   }
 })
 

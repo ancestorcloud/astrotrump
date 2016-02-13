@@ -9,7 +9,6 @@ const findRelationshipData = (relation, data) => {
   let relationData
 
   data.some((item) => {
-    console.log(item, relation)
     if (item.relationship === relation) {
       relationData = item
       return
@@ -19,17 +18,19 @@ const findRelationshipData = (relation, data) => {
   return relationData
 }
 
-const extractFbData = (user, data) => ({
-  pictureUrl: user.picture.data.url,
+const extractFbData = ({birthday, name, picture}, data) => ({
+  pictureUrl: picture.data && picture.data.url,
+  highlightMissingData: true,
   data: {
     ...data,
-    birthday: user.birthday || ''
+    birthday: birthday || '',
+    fullName: name || ''
   }
 })
 
 const relationDataReducer = (state, { payload: user }) => {
   const relationData = findRelationshipData(state.id, user.family.data)
-  console.log(relationData, state.id)
+
   if (!relationData) return state
 
   return {

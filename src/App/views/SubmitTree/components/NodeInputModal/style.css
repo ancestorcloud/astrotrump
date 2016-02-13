@@ -1,3 +1,5 @@
+@import 'settings.colors';
+
 .heading {
   text-align: center;
   margin: 0;
@@ -10,6 +12,11 @@
 
 .label {
   text-indent: 8px;
+}
+
+.errorLabel {
+  composes: label;
+  color: var(--clr-red);
 }
 
 .inputField {

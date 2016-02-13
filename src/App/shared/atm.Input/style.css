@@ -7,3 +7,8 @@
   outline: none;
   padding: 8px;
 }
+
+.error {
+  composes: input;
+  border: solid 1px var(--clr-red);
+}

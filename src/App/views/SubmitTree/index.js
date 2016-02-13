@@ -5,6 +5,7 @@ import { updateTreeNode } from 'App/state/actions'
 import { Y, X } from 'obj.Layout'
 import Btn from 'atm.Btn'
 import Avatar from 'atm.Avatar'
+import TrumpConnection from 'mol.TrumpConnection'
 import Footer from 'org.Footer'
 import Tree from './components/Tree'
 import NodeInputModal from './components/NodeInputModal'
@@ -97,6 +98,8 @@ const SubmitTreeUi = ({modalData, onNodeSelect, progress, treeData: {
       <span>Add more information about your family to better match</span>
 
       <Btn copy='See Your Relation' theme='rust' style={{padding: '15px', width: '60%'}} />
+
+      <TrumpConnection avatarSrc={user.pictureUrl} size='small'/>
     </Y>
     <Footer />
   </div>
