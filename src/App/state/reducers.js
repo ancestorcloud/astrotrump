@@ -31,7 +31,7 @@ const extractFbData = ({birthday, name, picture}, data) => ({
 const relationDataReducer = (state, { payload: user }) => {
   if (!(user && user.family && user.family.data)) return state
 
-  const relationData = findRelationshipData(state.id, user && user.family && user.family.data)
+  const relationData = findRelationshipData(state.id, user.family.data)
 
   return !relationData
   ? state
