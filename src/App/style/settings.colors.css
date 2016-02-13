@@ -8,9 +8,6 @@
 --clr-pink:          #EC87C0;
 --clr-dark-pink:     #D770AD;
 
---clr-red:           #ED5565;
---clr-dark-red:      #DA4453;
-
 --clr-yellow:        #FFCE54;
 --clr-dark-yellow:   #F6BB42; 
 
@@ -25,11 +22,13 @@
 
 --clr-green:         #8fbd62;
 
---clr-cyan:          #0AA7C6;
+--clr-cyan:          #0aa7c6;
 
 --clr-navy:          #1e3141;
 --clr-cream:         #F3E8D3;
---clr-rust:          #CC3C27;
+
+--clr-red:           #9b080d;
+--clr-rust:          #b44232;
 --clr-facebook-blue: #415DA3;
 }
 

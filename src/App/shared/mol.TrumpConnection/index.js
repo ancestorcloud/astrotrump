@@ -16,7 +16,7 @@ const TrumpConnection = ({avatarSrc, degrees, size = 'big'}) => (
     />
     <div className={style.circleWrapper}>
       <img
-        src='/images/connection-circle.svg'
+        src={`/images/${size === 'big' ? 'connection-circle' : 'lasso'}.svg`}
         className={style.circle}
       />
       {

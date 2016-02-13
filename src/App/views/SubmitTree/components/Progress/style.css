@@ -1,0 +1,26 @@
+@import 'settings.colors';
+
+.rounding {
+  border-radius: 25px;
+}
+
+.inner {
+  composes: rounding;
+  background-color: var(--clr-navy);
+  transition: .25s;
+  height: 100%;
+  text-align: center;
+}
+
+.outer {
+  composes: rounding;
+  background-color: var(--clr-dark-base);
+  width: 100%;
+  height: 50px;
+}
+
+.progress {
+  color: white;
+  font-size: 100%;
+  transition: .25s;
+}

@@ -5,8 +5,11 @@ import { updateTreeNode } from 'App/state/actions'
 import { Y, X } from 'obj.Layout'
 import Btn from 'atm.Btn'
 import Avatar from 'atm.Avatar'
+import TrumpConnection from 'mol.TrumpConnection'
+import Footer from 'org.Footer'
 import Tree from './components/Tree'
 import NodeInputModal from './components/NodeInputModal'
+import Progress from './components/Progress'
 
 const sizing = {
   sm: '60',
@@ -18,21 +21,40 @@ const determineDefault = (gender) => (gender === 'male' || gender === 'female')
   ? `/assets/icons/${gender}.svg`
   : `/assets/icons/male.svg`
 
-const setUserAvatar = (url, gender) => url
-  ? url
-  : determineDefault(gender)
+const setUserAvatarProps = ({pictureUrl, gender, fieldsComplete}) => {
+
+  let src = pictureUrl
+  let showAlert = false
+  let showBorder = true
+
+  if (!pictureUrl && !fieldsComplete) {
+    src = '/assets/icons/plus.svg'
+    showBorder = false
+  } else if (pictureUrl && !fieldsComplete) {
+    showAlert = true
+  } else if (!pictureUrl && fieldsComplete) {
+    src = determineDefault(gender)
+    showBorder = false
+  }
+
+  return {
+    src,
+    showAlert,
+    showBorder
+  }
+}
 
 const AncestorBlock = ({ data, onSelect, size }) =>
   <div style={{textAlign: 'center', maxWidth: sizing[size]}}>
-    <div onClick={onSelect.bind(null, data.id)}>
-      <Avatar size={sizing[size]} src={setUserAvatar(data.pictureUrl, data.gender)} />
+    <div className={style.nodeWrapper} onClick={onSelect.bind(null, data.id)}>
+      <Avatar size={sizing[size]} { ...setUserAvatarProps(data) } />
     </div>
-    <span style={{display: 'block', marginTop: '2px', fontSize: '.5em'}}>
+    <span style={{display: 'block', marginTop: '2px', fontSize: '1em'}}>
       {data.title}
     </span>
   </div>
 
-const SubmitTreeUi = ({modalData, onNodeSelect, treeData: {
+const SubmitTreeUi = ({modalData, onNodeSelect, progress, treeData: {
   user,
   father,
   mother,
@@ -41,7 +63,7 @@ const SubmitTreeUi = ({modalData, onNodeSelect, treeData: {
   mFather,
   mMother
 }}) =>
-  <div className={style.root}>
+  <div className={style.root} >
     <NodeInputModal { ...modalData } />
     <header className={style.header}>
       <div className={style.banner}>
@@ -49,12 +71,11 @@ const SubmitTreeUi = ({modalData, onNodeSelect, treeData: {
       </div>
       <h1 className={style.h1}>Add Your Family</h1>
     </header>
-    <Y y className={style.tree}>
+    <Y y tag='main' className={style.tree} >
 
-      <AncestorBlock data={user} size='lg' onSelect={onNodeSelect}
-      />
+      <AncestorBlock data={user} size='lg' onSelect={onNodeSelect} />
 
-      <div style={{textAlign: 'center'}}>
+      <X justify='space-between' style={{width: '100%'}}>
         <Tree
           top={<AncestorBlock data={father} size='md' onSelect={onNodeSelect}/>}
           left={<AncestorBlock data={pFather} size='sm' onSelect={onNodeSelect}/>}
@@ -66,14 +87,36 @@ const SubmitTreeUi = ({modalData, onNodeSelect, treeData: {
           left={<AncestorBlock data={mFather} size='sm' onSelect={onNodeSelect}/>}
           right={<AncestorBlock data={mMother} size='sm' onSelect={onNodeSelect}/>}
         />
+      </X>
+    </Y>
+    <Y y tag='footer' className={style.footer}>
+      <div style={{width: '100%'}}>
+        <h4>Matching Confidence</h4>
+        <Progress percent={progress} height='25px' />
       </div>
+
+      <span>Add more information about your family to better match</span>
+
+      <Btn copy='See Your Relation' theme='rust' style={{padding: '15px', width: '60%'}} />
+
+      <TrumpConnection avatarSrc={user.pictureUrl} size='small'/>
     </Y>
-    <Y y tag='footer'>
-      <Btn copy='See Your Relation' theme='rust' />
-    </Y>
+    <Footer />
   </div>
 
 SubmitTreeUi.propTypes = {}
+
+/**
+ * 1. add 1 to the total because we can have have 100% confidence
+ */
+const calculateProgress = (treeData) => {
+  const treeNodes = Object.keys(treeData)
+  const progress = treeNodes
+    .reduce((prev, curr) =>
+      prev + Number(treeData[curr].fieldsComplete),
+    0) / (treeNodes.length + 1)
+  return progress * 100
+}
 
 const SubmitTree = React.createClass({
 
@@ -115,6 +158,7 @@ const SubmitTree = React.createClass({
     const { props, state, onNodeSelect, onNodeUpdate, onFormClose } = this
     const { modalIsOpen, currentNode } = state
     const { treeData } = props
+    const progress = calculateProgress(treeData)
     const nodeData = treeData[currentNode]
     const modalData = {
       modalIsOpen,
@@ -124,7 +168,7 @@ const SubmitTree = React.createClass({
       onNodeUpdate
     }
 
-    return <SubmitTreeUi { ...{ modalData, onNodeSelect, treeData } } />
+    return <SubmitTreeUi { ...{ modalData, onNodeSelect, treeData, progress } } />
   }
 })
 

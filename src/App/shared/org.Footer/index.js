@@ -13,7 +13,9 @@ const Footer = () => (
       }}
     />
     &nbsp;
-    <span>by AncestorCloud</span>
+    <span>
+      by <a href='http://ancestorcloud.com/#/' target='_bank'>AncestorCloud</a>
+    </span>
   </div>
 )
 

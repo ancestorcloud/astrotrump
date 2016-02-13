@@ -1,7 +1,6 @@
 @import 'settings.colors';
 
 .footer {
-  background: var(--clr-navy);
   width: 100%;
   height: 80px;
   color: #fff;

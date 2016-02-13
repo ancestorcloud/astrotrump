@@ -9,7 +9,7 @@ const Tree = ({top, left, right}) =>
     </X>
     <X style={{marginTop: '10px'}}>
       {left}
-      <span style={{width: '10px'}} />
+      <span style={{width: '20px'}} />
       {right}
     </X>
   </div>

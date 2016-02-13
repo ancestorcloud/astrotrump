@@ -18,17 +18,19 @@ const findRelationshipData = (relation, data) => {
   return relationData
 }
 
-const extractFbData = (user, data) => ({
-  pictureUrl: user.picture.data.url,
+const extractFbData = ({birthday, name, picture}, data) => ({
+  pictureUrl: picture.data && picture.data.url,
+  highlightMissingData: true,
   data: {
     ...data,
-    birthday: user.birthday || ''
+    birthday: birthday || '',
+    fullName: name || ''
   }
 })
 
-const relationDataReducer = relation => (state, { payload: user }) => {
-  const relationData = findRelationshipData(relation, user.family.data)
-  console.log(state, relation)
+const relationDataReducer = (state, { payload: user }) => {
+  const relationData = findRelationshipData(state.id, user.family.data)
+
   if (!relationData) return state
 
   return {
@@ -37,10 +39,26 @@ const relationDataReducer = relation => (state, { payload: user }) => {
   }
 }
 
-const fieldsAreComplete = (data) => data.fullName && data.birthday && data.location
+const fieldsAreComplete = (data) => !!(
+  data.fullName &&
+  data.birthday &&
+  data.location
+)
+
+const updateTreeNode = (state, { payload: { nodeName, data } }) => (nodeName === state.id)
+  ? {
+    ...state,
+    fieldsComplete: fieldsAreComplete(data),
+    data: {
+      ...state.data,
+      ...data
+    }
+  }
+  : state
 
 const initialDefaultState = {
   fieldsComplete: false,
+  highlightMissingData: false,
   pictureUrl: '',
   data: {
     fullName: '',
@@ -51,19 +69,18 @@ const initialDefaultState = {
 
 export const user = createReducer({
   id: 'user',
-  title: '',
+  title: 'You',
   gender: '',
   ...initialDefaultState
 }, {
 
   [USER_UPDATE_FACEBOOK_DATA]: (state, { payload: user }) => ({
     ...state,
-    title: user.name,
     gender: user.gender,
     ...extractFbData(user, state.data)
   }),
 
-  // [UPDATE_TREE_NODE]: (state, { payload: { nodeName, data }}) =>
+  [UPDATE_TREE_NODE]: updateTreeNode
 
 })
 
@@ -73,21 +90,9 @@ export const father = createReducer({
   gender: 'male',
   ...initialDefaultState
 }, {
-  [UPDATE_TREE_NODE]: (state, { payload: { nodeName, data } }) => {
-    console.log(nodeName, state.id)
-    if (nodeName !== state.id) return state
+  [UPDATE_TREE_NODE]: updateTreeNode,
 
-    return {
-      ...state,
-      fieldsComplete: fieldsAreComplete(data),
-      data: {
-        ...state,
-        ...data
-      }
-    }
-  }
-
-  // [USER_UPDATE_FACEBOOK_DATA]: (state, { payload: user }) => relationDataReducer('father')
+  [USER_UPDATE_FACEBOOK_DATA]: relationDataReducer
 })
 
 export const mother = createReducer({
@@ -96,42 +101,46 @@ export const mother = createReducer({
   gender: 'female',
   ...initialDefaultState
 }, {
-  // [USER_UPDATE_FACEBOOK_DATA]: (state, { payload: user }) => relationDataReducer('mother')
+  [UPDATE_TREE_NODE]: updateTreeNode,
+
+  [USER_UPDATE_FACEBOOK_DATA]: relationDataReducer
 })
 
 export const pFather = createReducer({
   id: 'pFather',
-  title: 'Paternal Grandfather',
+  title: `Father's Father`,
   gender: 'male',
   ...initialDefaultState
 }, {
-
+  [UPDATE_TREE_NODE]: updateTreeNode
 })
 
 export const pMother = createReducer({
   id: 'pMother',
-  title: 'Paternal Grandmother',
+  title: `Father's Mother`,
   gender: 'female',
   ...initialDefaultState
 }, {
-
+  [UPDATE_TREE_NODE]: updateTreeNode
 })
 
 export const mFather = createReducer({
   id: 'mFather',
-  title: 'Maternal Grandfather',
-  gender: 'female',
+  title: `Mother's Father`,
+  gender: 'male',
   ...initialDefaultState
 }, {
+  [UPDATE_TREE_NODE]: updateTreeNode
 
 })
 
 export const mMother = createReducer({
-  id: 'pMother',
-  title: 'Maternal Grandmother',
-  gender: 'male',
+  id: 'mMother',
+  title: `Mother's Mother`,
+  gender: 'female',
   ...initialDefaultState
 }, {
+  [UPDATE_TREE_NODE]: updateTreeNode
 
 })
 

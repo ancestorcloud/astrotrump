@@ -5,6 +5,15 @@
   background-color: var(--clr-cream);
 }
 
+.container {
+  max-width: 320px;
+  width: 100%;
+}
+
+.center {
+  margin: 0 auto;
+}
+
 .header {
   text-align: center;
 }
@@ -13,10 +22,27 @@
   padding: 18px 0;
 }
 
-.h1 {
+.heading {
   color: var(--clr-navy);
 }
 
 .tree {
-  padding: 20px 0;
+  composes: container;
+  composes: center;
+  padding: 20px 5px;
+}
+
+.nodeWrapper:hover {
+  cursor: pointer;
+}
+
+.footer {
+  composes: container;
+  composes: center;
+  padding: 4px;
+  text-align: center;
+}
+
+.footer > * {
+  margin: 8px 0;
 }
