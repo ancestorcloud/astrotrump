@@ -73,7 +73,7 @@ const bannerImages = [
   ...bannerImageNames,
   ...bannerImageNames,
   ...bannerImageNames
-].map((imageName) => <img src={`/images/bannerImages/${imageName}`} />)
+].map((imageName, i) => <img key={i} src={`/images/bannerImages/${imageName}`} />)
 
 const Landing = ({
   session,
@@ -82,7 +82,7 @@ const Landing = ({
   updateFacebookUserData,
   transitionTo
 }) => {
-  if (session.status === 'connected') transitionTo('tree')
+  if (session.status === 'connected') transitionTo('/tree')
 
   return (
     <div className={style.hero}>
