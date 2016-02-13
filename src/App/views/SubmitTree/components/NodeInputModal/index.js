@@ -76,6 +76,10 @@ const NodeForm = React.createClass({
     }
   },
 
+  getFocusEl () {
+
+  },
+
   onInputChange (key, {target: { value }}) {
 
     this.setState({
@@ -93,7 +97,7 @@ const NodeForm = React.createClass({
   render () {
     const { onSave, onInputChange, state, props } = this
     const { highlightMissingData } = props.form
-console.log(!!(state.fullName && highlightMissingData))
+
     return <NodeFormUi { ...{ ...state, onSave, onInputChange, highlightMissingData } } />
   }
 })
