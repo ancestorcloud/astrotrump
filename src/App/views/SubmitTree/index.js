@@ -1,7 +1,8 @@
 import style from './style'
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { updateTreeNode } from 'App/state/actions'
+import { updateTreeNode, findRelation } from 'App/state/actions'
+import { transitionTo, replaceWith } from 'App/state/routing/actions'
 import { Y, X } from 'obj.Layout'
 import Btn from 'atm.Btn'
 import Avatar from 'atm.Avatar'
@@ -54,7 +55,7 @@ const AncestorBlock = ({ data, onSelect, size }) =>
     </span>
   </div>
 
-const SubmitTreeUi = ({modalData, onNodeSelect, progress, treeData: {
+const SubmitTreeUi = ({onTreeSubmit, modalData, onNodeSelect, progress, treeData: {
   user,
   father,
   mother,
@@ -97,7 +98,7 @@ const SubmitTreeUi = ({modalData, onNodeSelect, progress, treeData: {
 
       <span>Add more information about your family to better match</span>
 
-      <Btn copy='See Your Relation' theme='rust' style={{padding: '15px', width: '60%'}} />
+      <Btn onClick={onTreeSubmit} copy='See Your Relation' theme='rust' style={{padding: '15px', width: '60%'}} />
 
       <TrumpConnection avatarSrc={user.pictureUrl} size='small'/>
     </Y>
@@ -122,13 +123,22 @@ const SubmitTree = React.createClass({
 
   propTypes: {
     treeData: PropTypes.object.isRequired,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    isAuthenticated: PropTypes.bool
   },
 
   getInitialState () {
     return {
       modalIsOpen: false,
       currentNode: ''
+    }
+  },
+
+  componentDidMount () {
+    const { dispatch, isAuthenticated } = this.props
+
+    if (!isAuthenticated) {
+      dispatch(replaceWith('/'))
     }
   },
 
@@ -154,8 +164,14 @@ const SubmitTree = React.createClass({
     })
   },
 
+  onTreeSubmit () {
+    const { treeData, dispatch } = this.props
+    dispatch(findRelation(treeData))
+    dispatch(transitionTo('/result'))
+  },
+
   render () {
-    const { props, state, onNodeSelect, onNodeUpdate, onFormClose } = this
+    const { props, state, onTreeSubmit, onNodeSelect, onNodeUpdate, onFormClose } = this
     const { modalIsOpen, currentNode } = state
     const { treeData } = props
     const progress = calculateProgress(treeData)
@@ -168,10 +184,11 @@ const SubmitTree = React.createClass({
       onNodeUpdate
     }
 
-    return <SubmitTreeUi { ...{ modalData, onNodeSelect, treeData, progress } } />
+    return <SubmitTreeUi { ...{ onTreeSubmit, modalData, onNodeSelect, treeData, progress } } />
   }
 })
 
-export default connect(({treeData}) => ({
-  treeData
+export default connect(({treeData, session}) => ({
+  treeData,
+  isAuthenticated: session.status === 'connected'
 }))(SubmitTree)
