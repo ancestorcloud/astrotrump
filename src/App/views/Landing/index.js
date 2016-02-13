@@ -82,7 +82,7 @@ const Landing = ({
   updateFacebookUserData,
   transitionTo
 }) => {
-  // if (session.status === 'connected') transitionTo('tree')
+  if (session.status === 'connected') transitionTo('tree')
 
   return (
     <div className={style.hero}>

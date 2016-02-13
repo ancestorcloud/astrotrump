@@ -8,13 +8,13 @@ const avatarSize = {
   big: 150
 }
 
-const TrumpConnection = ({avatarSrc, degrees, size = 'big'}) => (
-  <div className={size === 'small' ? style['wrapper-small'] : style.wrapper}>
+const TrumpConnection = ({avatarSrc, degrees, size = 'big', loading = false}) => (
+  <div className={`${size === 'small' ? style['wrapper-small'] : style.wrapper} ${degrees ? undefined : style['wrapper-noDegrees']}`}>
     <Avatar
       src='/images/trump.jpg'
       size={avatarSize[size]}
     />
-    <div className={style.circleWrapper}>
+    <div className={`${style['circleWrapper']} ${loading ? style['circleWrapper-spin'] : undefined}`}>
       <img
         src={`/images/${size === 'big' ? 'connection-circle' : 'lasso'}.svg`}
         className={style.circle}

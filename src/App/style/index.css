@@ -11,6 +11,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--base-font-family);
   text-rendering: optimizeLegibility;
+
+  overflow-y: scroll;
 }
 
 html,
