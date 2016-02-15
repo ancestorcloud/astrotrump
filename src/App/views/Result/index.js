@@ -68,11 +68,13 @@ const Result = React.createClass({
                 <div className={style.buttonsWrapper}>
                   <div>
                     <Btn
+                      iconSrc='/images/facebook.svg'
                       copy='Share your cousin'
                     />
                   </div>
                   <div>
                     <Btn
+                      iconSrc='/images/twitter.svg'
                       copy='Share your cousin'
                     />
                   </div>

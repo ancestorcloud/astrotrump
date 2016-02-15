@@ -57,7 +57,7 @@
   .explainer {
     background: var(--clr-cream);
     width: 100%;
-    padding: var(--padding);
+    padding: var(--padding) var(--spacing);
 
     display: flex;
     flex-direction: column;
