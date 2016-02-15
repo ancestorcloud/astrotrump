@@ -1,0 +1,18 @@
+
+
+.tree {
+  background-size: .8%;
+  background-repeat: no-repeat;
+  background-position: left 50% top 57%;
+  background-image: url('/images/vertical-line-small.svg');
+
+}
+
+.base {
+  margin-top: 25px;
+  background-size: 85%;
+  background-repeat: no-repeat;
+  background-position: left 50% top 30%;
+  background-image: url('/images/horizontal-line-small.svg');
+
+}

@@ -76,7 +76,7 @@ const SubmitTreeUi = ({onTreeSubmit, modalData, onNodeSelect, progress, treeData
 
       <AncestorBlock data={user} size='lg' onSelect={onNodeSelect} />
 
-      <X justify='space-between' style={{width: '100%'}}>
+      <X className={style.treeBase} justify='space-between' style={{width: '100%'}}>
         <Tree
           top={<AncestorBlock data={father} size='md' onSelect={onNodeSelect}/>}
           left={<AncestorBlock data={pFather} size='sm' onSelect={onNodeSelect}/>}

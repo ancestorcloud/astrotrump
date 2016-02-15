@@ -3,11 +3,11 @@ import React from 'react'
 import { X } from 'obj.Layout'
 
 const Tree = ({top, left, right}) =>
-  <div style={{display: 'inline-block'}}>
+  <div className={style.tree} >
     <X y>
       {top}
     </X>
-    <X style={{marginTop: '10px'}}>
+    <X className={style.base}>
       {left}
       <span style={{width: '20px'}} />
       {right}
