@@ -21,7 +21,7 @@ Btn.propTypes = {
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   children: PropTypes.node,
-  theme: PropTypes.oneOf(['aqua', 'facebook', 'rust']),
+  theme: PropTypes.oneOf(['aqua', 'facebook', 'twitter', 'rust']),
   type: PropTypes.string,
   iconSrc: PropTypes.string
 }

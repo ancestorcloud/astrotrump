@@ -38,6 +38,14 @@ const Result = React.createClass({
       }, 2000)
     }
 
+    const degreeWithSuffix = `${degreesPlaceholder}${getSuffix(degreesPlaceholder)}`
+
+    const shareData = {
+      link: 'https://cousintrump.com',
+      title: `I'm ${degreeWithSuffix} cousins with Donald Trump`,
+      description: 'test description'
+    }
+
     return (
       <div className={style.wrapper}>
         <div className={style.main}>
@@ -63,17 +71,37 @@ const Result = React.createClass({
           ? (
             <div className={style.explainerWrapper}>
               <div className={style.explainer}>
-                <h2>You are {degreesPlaceholder}{getSuffix(degreesPlaceholder)} cousins with Donald</h2>
+                <h2>You are {degreeWithSuffix} cousins with Donald</h2>
                 <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.</div>
                 <div className={style.buttonsWrapper}>
                   <div>
                     <Btn
+                      iconSrc='/images/facebook.svg'
                       copy='Share your cousin'
+                      theme='facebook'
+                      onClick={() => window.FB.ui({
+                        method: 'feed',
+                        display: 'popup',
+                        link: shareData.link,
+                        name: shareData.title,
+                        description: shareData.description,
+                        picture: 'http://i.imgur.com/rYSxqyU.jpg',
+                        caption: 'test caption'
+                      })}
                     />
                   </div>
                   <div>
                     <Btn
+                      iconSrc='/images/twitter.svg'
                       copy='Share your cousin'
+                      theme='twitter'
+                      onClick={() => {
+                        window.open(
+                          `https://twitter.com/intent/tweet?text=${shareData.title} ${shareData.link}`,
+                          '',
+                          'fullscreen=0,height=400,width=600'
+                        )
+                      }}
                     />
                   </div>
                 </div>

@@ -10,8 +10,6 @@
   color: white;
   text-transform: uppercase;
   font-size: 13px;
-
-  
 }
 
   .iconCopy {
@@ -31,6 +29,12 @@
     background-color: var(--clr-facebook-blue);
   }
 
+  .twitter {
+    composes: base;
+
+    background-color: var(--clr-twitter-blue);
+  }
+
   .rust {
     composes: base;
 
@@ -40,6 +44,7 @@
 .icon {
   width: 32px;
   height: 32px;
+  margin-right: 8px;
 }
 
 .copy {
