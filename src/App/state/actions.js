@@ -17,6 +17,8 @@ export const updateTreeNode = (nodeName, data) => ({
 
 export const findRelation = (treeData) => (dispatch, getState) => {
 
+  return {}
+
   const sessionId = 'fakeid'
   /**
    * creating and array of axios get requests for each individual we need
@@ -47,11 +49,8 @@ export const findRelation = (treeData) => (dispatch, getState) => {
       })]
     }))
 
-console.log(createIndividualRequests)
   axios.all(createIndividualRequests.map(apiCall => apiCall()))
-  .then(axios.spread((acct, perms) => {
-      // Both requests are now complete
-      console.log(acct)
+  .then(axios.spread((...responses) => {
   }))
 
   return {
