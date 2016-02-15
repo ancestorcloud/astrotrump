@@ -13,13 +13,14 @@ html {
   text-rendering: optimizeLegibility;
 
   overflow-y: scroll;
+  /*font-family: arial;*/
+  font-family: 'Noto Sans';
 }
 
 html,
 body,
 #app {
   height: 100%;
-  font-family: arial;
   color: var(--clr-darkest-grey);
 }
 
