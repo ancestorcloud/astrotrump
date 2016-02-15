@@ -41,9 +41,10 @@ const NodeFormUi = ({fullName, birthday, location, onInputChange, onSave, highli
         errorState={!!(!fullName && highlightMissingData)}
       />
       <InputField className={style.inputField}
-        label='Birth date'
+        label='Birth date (MM/DD/YYY)'
         input={{
           type: 'text',
+          placeholder: 'ex: 12/05/1988',
           value: birthday,
           onChange: onInputChange.bind(null, 'birthday')
         }}
@@ -53,6 +54,7 @@ const NodeFormUi = ({fullName, birthday, location, onInputChange, onSave, highli
         label='Birth location'
         input={{
           type: 'text',
+          placeholder: 'ex: New York, New York, USA',
           value: location,
           onChange: onInputChange.bind(null, 'location')
         }}

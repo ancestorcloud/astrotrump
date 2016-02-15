@@ -17,8 +17,9 @@ export const updateTreeNode = (nodeName, data) => ({
 
 export const findRelation = (treeData) => (dispatch, getState) => {
 
-  const sessionId = 'fakeid'
+  return {}
 
+  const sessionId = 'fakeid'
   /**
    * creating and array of axios get requests for each individual we need
    * to create in the ogf DB
@@ -39,7 +40,7 @@ export const findRelation = (treeData) => (dispatch, getState) => {
         gender
       })
     }))
-    .map(({id, ...params}) => axios.get.bind(null, { /* [4] */
+    .map(({id, ...params}) => axios.get.bind(null, '/', { /* [4] */
       baseUrl: 'http://wsdev.onegreatfamily.com/v11.02/Individual.svc/CreateUpdate',
       params,
       transformResponse: [(data) => ({ /* [5] */
@@ -48,7 +49,9 @@ export const findRelation = (treeData) => (dispatch, getState) => {
       })]
     }))
 
-  axios.all(createIndividualRequests)
+  axios.all(createIndividualRequests.map(apiCall => apiCall()))
+  .then(axios.spread((...responses) => {
+  }))
 
   return {
   }
