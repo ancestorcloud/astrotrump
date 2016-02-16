@@ -1,5 +1,8 @@
 import axios from 'axios'
+import Firebase from 'firebase'
 import { buildCreateIndividualQueryParams } from './actions.utils.js'
+
+const fbRef = new Firebase('https://astrotrump.firebaseio.com/users')
 
 export const CALL_API = 'CALL_API'
 
@@ -15,7 +18,30 @@ export const updateTreeNode = (nodeName, data) => ({
   }
 })
 
+const trimTree = ({father, mother, mFather, mMother, pFather, pMother}) => ({
+  father: father.data,
+  mother: mother.data,
+  mFather: mFather.data,
+  mMother: mMother.data,
+  pFather: pFather.data,
+  pMother: pMother.data
+})
+
+export const captureData = ({name, email}, treeData) => {
+  fbRef.push({
+    name,
+    email,
+    treeData: trimTree(treeData)
+  })
+}
+
 export const findRelation = (treeData) => (dispatch, getState) => {
+
+  const { user } = getState().session
+
+  captureData(user, treeData)
+
+  return {}
 
   const sessionId = 'fakeid'
 
@@ -39,7 +65,7 @@ export const findRelation = (treeData) => (dispatch, getState) => {
         gender
       })
     }))
-    .map(({id, ...params}) => axios.get.bind(null, { /* [4] */
+    .map(({id, ...params}) => axios.get.bind(null, '/', { /* [4] */
       baseUrl: 'http://wsdev.onegreatfamily.com/v11.02/Individual.svc/CreateUpdate',
       params,
       transformResponse: [(data) => ({ /* [5] */
@@ -48,7 +74,9 @@ export const findRelation = (treeData) => (dispatch, getState) => {
       })]
     }))
 
-  axios.all(createIndividualRequests)
+  axios.all(createIndividualRequests.map(apiCall => apiCall()))
+  .then(axios.spread((...responses) => {
+  }))
 
   return {
   }
