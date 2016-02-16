@@ -27,21 +27,20 @@ const trimTree = ({father, mother, mFather, mMother, pFather, pMother}) => ({
   pMother: pMother.data
 })
 
-export const captureData = ({name, email}, treeData) => {
-  fbRef.push({
-    name,
-    email,
-    treeData: trimTree(treeData)
-  })
-}
-
-export const findRelation = (treeData) => (dispatch, getState) => {
+export const captureData = (treeData) => (dispatch, getState) => {
 
   const { user } = getState().session
 
-  captureData(user, treeData)
+  if (user.email) {
+    fbRef.child(user.email).set({
+      name: user.name,
+      treeData: trimTree(treeData)
+    })
+  }
 
-  return {}
+}
+
+export const findRelation = (treeData) => (dispatch, getState) => {
 
   const sessionId = 'fakeid'
 
