@@ -21,7 +21,7 @@ const statusChangeCallback = (response /* 1 */, updateAuthResponse, updateFacebo
   updateAuthResponse(response.authResponse, response.status)
 
   if (response.status === 'connected') { /* 2 */
-    window.FB.api('/me?fields=name,gender,birthday,location,picture.type(large),family{name,birthday,bio,relationship,picture.type(large){url,is_silhouette}}', (response) => {
+    window.FB.api('/me?fields=name,email,gender,birthday,location,picture.type(large),family{name,birthday,bio,relationship,picture.type(large){url,is_silhouette}}', (response) => {
       updateFacebookUserData(response)
     })
   }
