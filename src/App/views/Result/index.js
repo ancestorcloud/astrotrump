@@ -105,6 +105,16 @@ const Result = React.createClass({
                     />
                   </div>
                 </div>
+                <hr style={{
+                  border: 'none',
+                  width: '100%',
+                  height: '3px',
+                  backgroundColor: '#aaa'
+                }}/>
+                <h3 style={{
+                  textAlign: 'center'
+                }}>How did we know?</h3>
+                <div>Based on family data almost any two people can be matched to a common ancestor. We've got a global family tree with information on most people's ancestors. However, we need a little bit more information about your family to accurately tell you the common ancestor between you and Trump. The above is an estimation based on the average US citizen's data.</div>
                 <Footer />
               </div>
             </div>
