@@ -116,16 +116,12 @@ const Result = React.createClass({
   }
 })
 
+Result.propTypes = {
+  session: PropTypes.object,
+  degrees: PropTypes.number
+}
+
 export default connect(({session}) => ({
-  // sample data
-  session: {
-    user: {
-      picture: {
-        data: {
-          url: 'http://i.imgur.com/lEzM7g8.jpg'
-        }
-      }
-    }
-  },
-  degrees: false
+  session,
+  degrees: 27
 }))(Result)
