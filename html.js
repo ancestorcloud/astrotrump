@@ -27,6 +27,13 @@ module.exports = {
       'index.html': [
         '<html>',
           '<head>',
+            '<script>' +
+              '(function(_,e,rr,s){_errs=[s];var c=_.onerror;_.onerror=function(){var a=arguments;_errs.push(a);' +
+              'c&&c.apply(this,a)};var b=function(){var c=e.createElement(rr),b=e.getElementsByTagName(rr)[0];' +
+              'c.src="//beacon.errorception.com/"+s+".js";c.async=!0;b.parentNode.insertBefore(c,b)};' +
+              '_.addEventListener?_.addEventListener("load",b,!1):_.attachEvent("onload",b)})' +
+              '(window,document,"script","56c35a2a3f17c6945c000be5");' +
+            '</script>',
             '<meta charset="utf-8"/>',
             '<meta name="viewport" content="width=device-width, initial-scale=1">',
             '<title>' + config.title + '</title>',
