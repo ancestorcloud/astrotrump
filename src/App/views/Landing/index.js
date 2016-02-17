@@ -104,6 +104,7 @@ const Landing = ({
         <a onClick={login}>
           <Btn
             theme='facebook'
+            iconSrc='/images/facebook.svg'
             copy='Continue with Facebook'
           />
         </a>
