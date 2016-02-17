@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Firebase from 'firebase'
-import { buildCreateIndividualQueryParams } from './actions.utils.js'
+import { buildCreateIndividualQueryParams, formatEmailForFirebase } from './actions.utils.js'
 
 const fbRef = new Firebase('https://astrotrump.firebaseio.com/users')
 
@@ -32,7 +32,7 @@ export const captureData = (treeData) => (dispatch, getState) => {
   const { user } = getState().session
 
   if (user.email) {
-    fbRef.child(user.email).set({
+    fbRef.child(formatEmailForFirebase(user.email)).set({
       name: user.name,
       treeData: trimTree(treeData)
     })
