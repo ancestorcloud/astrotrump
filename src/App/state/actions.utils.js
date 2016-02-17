@@ -23,3 +23,11 @@ export const buildCreateIndividualQueryParams = (sessionId, {fullName, birthday,
   BirthDate: convertBirthDate(birthday),
   BirthPlace: convertBirthPlace(location)
 })
+
+export const formatEmailForFirebase = (email) => {
+  const key = email.replace('@', '^')
+  if (key.indexOf('.') !== -1) {
+    return key.split('.').join('*')
+  }
+  return key
+}
