@@ -40,8 +40,9 @@ const Result = React.createClass({
 
     const shareData = {
       link: 'https://cousintrump.com',
-      title: `I'm ${degreeWithSuffix} cousins with Donald Trump`,
-      description: 'test description'
+      title: `I'm ${degreeWithSuffix} cousins with Donald Trump!`,
+      description: 'test description',
+      facebookBannerImage: 'http://i.imgur.com/rYSxqyU.jpg'
     }
 
     return (
@@ -84,8 +85,7 @@ const Result = React.createClass({
                         link: shareData.link,
                         name: shareData.title,
                         description: shareData.description,
-                        picture: 'http://i.imgur.com/rYSxqyU.jpg',
-                        caption: 'test caption'
+                        picture: shareData.facebookBannerImage
                       })}
                     />
                   </div>
