@@ -3,15 +3,20 @@
 .Footer {
   width: 100%;
   height: 80px;
-  color: #fff;
+  color: var(--darkest-grey);
 
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.Footer-navy {
-  composes: Footer;
+  .Footer-navy {
+    composes: Footer;
 
-  background-color: var(--clr-navy);
-}
+    background-color: var(--clr-navy);
+    color: #fff;
+  }
+
+  .Footer a, .Footer-navy a {
+    color: inherit;
+  }

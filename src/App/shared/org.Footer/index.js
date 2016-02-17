@@ -14,7 +14,7 @@ const Footer = ({color}) => (
     />
     &nbsp;
     <span>
-      by <a href='http://ancestorcloud.com/#/' target='_bank'>AncestorCloud</a>
+      by <a href='http://ancestorcloud.com/#/' target='_blank'>AncestorCloud</a>
     </span>
   </div>
 )
