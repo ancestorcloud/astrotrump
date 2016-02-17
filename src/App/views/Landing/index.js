@@ -96,7 +96,7 @@ const Landing = ({
         <h1 className={style.siteTitle}>Cousin Trump</h1>
         <div className={style.trumpWrapper}>
           <Avatar
-            src='/images/trump2.jpg'
+            src='/images/trump.jpg'
             size={150}
           />
         </div>

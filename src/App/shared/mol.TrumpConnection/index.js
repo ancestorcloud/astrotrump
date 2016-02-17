@@ -11,7 +11,7 @@ const avatarSize = {
 const TrumpConnection = ({avatarSrc, degrees, size = 'big', loading = false}) => (
   <div className={`${size === 'small' ? style['wrapper-small'] : style.wrapper} ${degrees ? undefined : style['wrapper-noDegrees']}`}>
     <Avatar
-      src='/images/trump2.jpg'
+      src='/images/trump.jpg'
       size={avatarSize[size]}
     />
     <div className={`${style['circleWrapper']} ${loading ? style['circleWrapper-spin'] : undefined}`}>
