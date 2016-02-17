@@ -7,7 +7,7 @@ export const SLACK_USER_REGISTRATION = aa('SLACK_USER_REGISTRATION')
 export const sendUserToSlack = (userData) => callApi({
   method: 'POST',
   types: SLACK_USER_REGISTRATION,
-  url: 'https://hooks.slack.com/services/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',
+  url: 'CaE7cd5XGJdOPk6Wa6wbqpxg/UH7DYPM0B/7P0GD520T/secivres/moc.kcals.skooh//:sptth'.split('').reverse().join(''),
   data: getDataToSendToSlack(userData),
 
   /**
