@@ -19,7 +19,7 @@ module.exports = {
 
   prod: function (data) {
     var config = {
-      title: 'AncestorCloud',
+      title: 'Cousin Trump',
       favicon: '/assets/icons/favicon.ico',
       gaId: 'UA-47141819-6'
     }
