@@ -57,16 +57,19 @@
   .explainer {
     background: var(--clr-cream);
     width: 100%;
-    padding: var(--padding) var(--spacing);
+    padding: var(--padding) var(--spacing) 0;
 
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
+  .explainer > * {
+    max-width: 600px;
+  }
+
   .explainer > *:not(:last-child) {
     margin-bottom: var(--spacing);
-    max-width: 600px;
   }
 
   .explainer > h2 {
