@@ -1,8 +1,6 @@
 import axios from 'axios'
-import Firebase from 'firebase'
-import { buildCreateIndividualQueryParams, formatEmailForFirebase } from './actions.utils.js'
-
-const fbRef = new Firebase('https://astrotrump.firebaseio.com/users')
+import { userFbRef, formatEmailForFirebase } from 'utils.firebase'
+import { buildCreateIndividualQueryParams } from './actions.utils.js'
 
 export const CALL_API = 'CALL_API'
 
@@ -32,10 +30,10 @@ export const captureData = (treeData) => (dispatch, getState) => {
   const { user } = getState().session
 
   if (user.email) {
-    fbRef.child(formatEmailForFirebase(user.email)).set({
-      name: user.name,
-      treeData: trimTree(treeData)
-    })
+    userFbRef
+      .child(formatEmailForFirebase(user.email))
+      .child('treeData')
+      .set(trimTree(treeData))
   }
 
 }

@@ -3,7 +3,7 @@ import React from 'react'
 import { X } from 'obj.Layout'
 
 const Tree = ({top, left, right}) =>
-  <div className={style.tree} >
+  <div>
     <X y>
       {top}
     </X>
