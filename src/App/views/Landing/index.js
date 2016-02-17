@@ -9,7 +9,11 @@ import Btn from 'atm.Btn'
 import Footer from 'org.Footer'
 import StepList from './components/StepList'
 
-import { updateAuthResponse, updateFacebookUserData } from 'App/state/session/actions'
+import resultsArr from './results.js'
+
+import { updateAuthResponse, updateFacebookUserData, updateResults } from 'App/state/session/actions'
+
+const getRandomNumberBetween = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
 /**
  * This is called with the results from FB.getLoginStatus().
@@ -17,12 +21,16 @@ import { updateAuthResponse, updateFacebookUserData } from 'App/state/session/ac
  *    Full docs on the response obj can be found in the documentation for FB.getLoginStatus().
  * 2. Logged into your app and FB.
  */
-const statusChangeCallback = (response /* 1 */, updateAuthResponse, updateFacebookUserData) => {
-  updateAuthResponse(response.authResponse, response.status)
+const statusChangeCallback = (response /* 1 */) => {
+  getStore().dispatch(updateAuthResponse(response.authResponse, response.status))
 
   if (response.status === 'connected') { /* 2 */
     window.FB.api('/me?fields=name,email,gender,birthday,location,picture.type(large),family{name,birthday,bio,relationship,picture.type(large){url,is_silhouette}}', (response) => {
-      updateFacebookUserData(response)
+      getStore().dispatch(updateResults({
+        degrees: getRandomNumberBetween(18, 45),
+        copy: resultsArr[getRandomNumberBetween(0, resultsArr.length - 1)]
+      }))
+      getStore().dispatch(updateFacebookUserData(response))
     })
   }
 }
@@ -40,18 +48,14 @@ window.fbAsyncInit = () => {
   })
 
   window.FB.getLoginStatus((response) => {
-    statusChangeCallback(
-      response,
-      (...args) => { getStore().dispatch(updateAuthResponse(...args)) },
-      (...args) => { getStore().dispatch(updateFacebookUserData(...args)) }
-    )
+    statusChangeCallback(response)
   })
 }
 
-const login = (updateAuthResponse, updateFacebookUserData) => {
+const login = () => {
   window.FB.login(() => {
     window.FB.getLoginStatus((response) => {
-      statusChangeCallback(response, updateAuthResponse, updateFacebookUserData)
+      statusChangeCallback(response)
     })
   }, {
     scope: 'public_profile,user_relationships,email',
@@ -78,8 +82,6 @@ const bannerImages = [
 const Landing = ({
   session,
 
-  updateAuthResponse,
-  updateFacebookUserData,
   transitionTo
 }) => {
   if (session.status === 'connected') transitionTo('/tree')
@@ -99,7 +101,7 @@ const Landing = ({
           />
         </div>
         <div className={style.description}>See how closely related you are to Donald Trump</div>
-        <a onClick={login.bind(null, updateAuthResponse, updateFacebookUserData)}>
+        <a onClick={login}>
           <Btn
             theme='facebook'
             copy='Continue with Facebook'
@@ -128,11 +130,9 @@ const Landing = ({
 Landing.propTypes = {
   session: PropTypes.object,
 
-  updateAuthResponse: PropTypes.func,
-  updateFacebookUserData: PropTypes.func,
   transitionTo: PropTypes.func
 }
 
 export default connect(({session}) => ({
   session
-}), { updateAuthResponse, updateFacebookUserData, transitionTo })(Landing)
+}), { transitionTo })(Landing)

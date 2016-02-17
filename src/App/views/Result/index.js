@@ -23,22 +23,20 @@ const getSuffix = (number) => {
 const Result = React.createClass({
   getInitialState () {
     return {
-      degreesPlaceholder: false
+      displayLoadingIndicator: true
     }
   },
 
   render () {
-    const {session: {user}, degrees} = this.props
-    const { degreesPlaceholder } = this.state
-    if (!degreesPlaceholder) {
-      console.log('starting timer')
+    const {session: {user, results: {degrees, copy: resultCopy}}} = this.props
+    const { displayLoadingIndicator } = this.state
+    if (displayLoadingIndicator) {
       setTimeout(() => {
-        console.log('setting degrees')
-        this.setState({degreesPlaceholder: 27})
+        this.setState({displayLoadingIndicator: false})
       }, 2000)
     }
 
-    const degreeWithSuffix = `${degreesPlaceholder}${getSuffix(degreesPlaceholder)}`
+    const degreeWithSuffix = `${degrees}${getSuffix(degrees)}`
 
     const shareData = {
       link: 'https://cousintrump.com',
@@ -50,29 +48,30 @@ const Result = React.createClass({
       <div className={style.wrapper}>
         <div className={style.main}>
           <img src='/images/stars.svg' />
-          <h2>{degreesPlaceholder ? 'Well would you look at that?' : 'Calculating...'}</h2>
+          <h2>{displayLoadingIndicator ? 'Calculating...' : 'Well would you look at that?'}</h2>
           <div style={{
             /**
              * 1. Compensates for padding on bottom of TrumpConnection when no degree
              *    is present. This way there's no stutter when the padding is added.
              */
-            paddingBottom: degreesPlaceholder ? '0' : '64px' /* 1 */
+            paddingBottom: displayLoadingIndicator ? '64px' : '0' /* 1 */
           }}>
             <TrumpConnection
               avatarSrc={user && user.picture && user.picture.data && user.picture.data.url}
-              degrees={degreesPlaceholder}
+              degrees={displayLoadingIndicator ? undefined : degrees}
               size='big'
-              loading={!degreesPlaceholder}
+              loading={displayLoadingIndicator}
             />
           </div>
         </div>
         {
-          degreesPlaceholder
-          ? (
+          displayLoadingIndicator
+          ? undefined
+          : (
             <div className={style.explainerWrapper}>
               <div className={style.explainer}>
                 <h2>You are {degreeWithSuffix} cousins with Donald</h2>
-                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.</div>
+                <div>{resultCopy}</div>
                 <div className={style.buttonsWrapper}>
                   <div>
                     <Btn
@@ -119,7 +118,6 @@ const Result = React.createClass({
               </div>
             </div>
           )
-          : undefined
         }
       </div>
     )
@@ -132,6 +130,5 @@ Result.propTypes = {
 }
 
 export default connect(({session}) => ({
-  session,
-  degrees: 27
+  session
 }))(Result)
