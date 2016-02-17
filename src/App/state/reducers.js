@@ -110,7 +110,7 @@ export const mother = createReducer({
 
 export const pFather = createReducer({
   id: 'pFather',
-  title: `Grandpa`,
+  title: `Father's Father`,
   gender: 'male',
   ...initialDefaultState
 }, {
@@ -119,7 +119,7 @@ export const pFather = createReducer({
 
 export const pMother = createReducer({
   id: 'pMother',
-  title: `Grandma`,
+  title: `Father's Mother`,
   gender: 'female',
   ...initialDefaultState
 }, {
@@ -128,7 +128,7 @@ export const pMother = createReducer({
 
 export const mFather = createReducer({
   id: 'mFather',
-  title: `Grandpa`,
+  title: `Mother's Father`,
   gender: 'male',
   ...initialDefaultState
 }, {
@@ -138,7 +138,7 @@ export const mFather = createReducer({
 
 export const mMother = createReducer({
   id: 'mMother',
-  title: `Grandma`,
+  title: `Mother's Mother`,
   gender: 'female',
   ...initialDefaultState
 }, {

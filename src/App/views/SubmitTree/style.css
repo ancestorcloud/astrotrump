@@ -27,16 +27,22 @@
 }
 
 .tree {
-  width: 100%;
   composes: container;
   composes: center;
   padding: 20px 5px;
+  background-size: .4%;
+  background-repeat: no-repeat;
+  background-position: left 50% top 38%;
+  background-image: url('/images/vertical-line-small.svg');
 }
 
-.tree > *:not(:first-child) {
+.treeBase {
   margin-top: 20px;
+  background-size: 40%;
+  background-repeat: no-repeat;
+  background-position: left 50% top 18%;
+  background-image: url('/images/horizontal-line.svg');
 }
-
 
 .nodeWrapper:hover {
   cursor: pointer;

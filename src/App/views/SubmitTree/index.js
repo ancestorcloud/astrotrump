@@ -45,16 +45,14 @@ const setUserAvatarProps = ({pictureUrl, gender, fieldsComplete}, showErrors) =>
   }
 }
 
-const AncestorBlock = ({ data, onSelect, size, showTitle = true }) =>
+const AncestorBlock = ({ data, onSelect, size }) =>
   <div style={{textAlign: 'center', maxWidth: sizing[size]}}>
     <div className={style.nodeWrapper} onClick={onSelect ? onSelect.bind(null, data.id) : _ => _}>
       <Avatar size={sizing[size]} { ...setUserAvatarProps(data, onSelect) } />
     </div>
-    {showTitle ?
-      <span style={{display: 'block', marginTop: '2px', fontSize: '1em'}}>
-        {data.title}
-      </span>
-    : undefined }
+    <span style={{display: 'block', marginTop: '2px', fontSize: '1em'}}>
+      {data.title}
+    </span>
   </div>
 
 const SubmitTreeUi = ({onTreeSubmit, modalData, onNodeSelect, progress, treeData: {
@@ -76,23 +74,22 @@ const SubmitTreeUi = ({onTreeSubmit, modalData, onNodeSelect, progress, treeData
     </header>
     <Y y tag='main' className={style.tree} >
 
-      <X>
-        <AncestorBlock data={user} size='lg' />
-      </X>
+      <AncestorBlock data={user} size='lg' />
 
-      <X style={{width: '60%'}} justify='space-between'>
-        <AncestorBlock data={father} size='md' onSelect={onNodeSelect} showTitle={true}/>
-        <AncestorBlock data={mother} size='md' onSelect={onNodeSelect} showTitle={true}/>
-      </X>
+      <X className={style.treeBase} justify='space-between' style={{width: '100%'}}>
+        <Tree
+          top={<AncestorBlock data={father} size='md' onSelect={onNodeSelect}/>}
+          left={<AncestorBlock data={pFather} size='sm' onSelect={onNodeSelect}/>}
+          right={<AncestorBlock data={pMother} size='sm' onSelect={onNodeSelect}/>}
+        />
 
-      <X style={{width: '100%'}} justify='space-between'>
-        <AncestorBlock data={pFather} size='sm' onSelect={onNodeSelect} showTitle={true}/>
-        <AncestorBlock data={pMother} size='sm' onSelect={onNodeSelect} />
-        <AncestorBlock data={mFather} size='sm' onSelect={onNodeSelect} />
-        <AncestorBlock data={mMother} size='sm' onSelect={onNodeSelect} />
+        <Tree
+          top={<AncestorBlock data={mother} size='md' onSelect={onNodeSelect}/>}
+          left={<AncestorBlock data={mFather} size='sm' onSelect={onNodeSelect}/>}
+          right={<AncestorBlock data={mMother} size='sm' onSelect={onNodeSelect}/>}
+        />
       </X>
     </Y>
-
     <Y y tag='footer' className={style.footer}>
       <div style={{width: '100%'}}>
         <h4>Data Completion</h4>
