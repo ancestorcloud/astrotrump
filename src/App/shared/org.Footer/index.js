@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import style from './style'
 
-const Footer = () => (
-  <div className={style.footer}>
+const Footer = ({color}) => (
+  <div className={style[color ? `Footer-${color}` : 'Footer']}>
     <span>built with</span>
     &nbsp;
     <img
@@ -14,9 +14,13 @@ const Footer = () => (
     />
     &nbsp;
     <span>
-      by <a href='http://ancestorcloud.com/#/' target='_bank'>AncestorCloud</a>
+      by <a href='http://ancestorcloud.com/#/' target='_blank'>AncestorCloud</a>
     </span>
   </div>
 )
+
+Footer.propTypes = {
+  color: PropTypes.oneOf(['navy'])
+}
 
 export default Footer

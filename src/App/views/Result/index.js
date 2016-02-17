@@ -114,8 +114,8 @@ const Result = React.createClass({
                   textAlign: 'center'
                 }}>How did we know?</h3>
                 <div>Based on family data almost any two people can be matched to a common ancestor. We&apos;ve got a global family tree with information on most people&apos;s ancestors. However, we need a little bit more information about your family to accurately tell you the common ancestor between you and Trump. The above is an estimation based on the average US citizen&apos;s data.</div>
-                <Footer />
               </div>
+              <Footer />
             </div>
           )
         }

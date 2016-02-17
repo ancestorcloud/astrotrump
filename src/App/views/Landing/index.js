@@ -123,7 +123,9 @@ const Landing = ({
           {bannerImages}
         </div>
       </div>
-      <Footer />
+      <Footer
+        color='navy'
+      />
     </div>
   )
 }
