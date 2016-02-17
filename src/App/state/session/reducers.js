@@ -1,7 +1,8 @@
 import { createReducer } from 'utils.redux'
 import {
   USER_UPDATE_FACEBOOK_DATA,
-  AUTH_UPDATE
+  AUTH_UPDATE,
+  USER_UPDATE_RESULTS
 } from './actions'
 
 const initialState = {
@@ -25,5 +26,10 @@ export const session = createReducer(initialState, {
       ...state.user,
       ...user
     }
+  }),
+
+  [USER_UPDATE_RESULTS]: (state, { payload: results }) => ({
+    ...state,
+    results
   })
 })
