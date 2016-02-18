@@ -8,6 +8,7 @@ import {
   formatEmailForFirebase,
   filterIncompleteNodes
 } from './actions.utils.js'
+import { userFbRef, formatEmailForFirebase } from 'utils.firebase'
 
 const fbRef = new Firebase('https://astrotrump.firebaseio.com/users')
 
@@ -45,10 +46,10 @@ export const captureData = (treeData) => (dispatch, getState) => {
   const { user } = getState().session
 
   if (user.email) {
-    fbRef.child(formatEmailForFirebase(user.email)).set({
-      name: user.name,
-      treeData: trimTree(treeData)
-    })
+    userFbRef
+      .child(formatEmailForFirebase(user.email))
+      .child('treeData')
+      .set(trimTree(treeData))
   }
 
 }

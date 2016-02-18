@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { getStore } from 'redux.store'
 import { transitionTo } from 'App/state/routing/actions'
+import { sendUserToSlack } from 'App/state/misc/actions'
 
 import Avatar from 'atm.Avatar'
 import Btn from 'atm.Btn'
@@ -26,6 +27,7 @@ const statusChangeCallback = (response /* 1 */) => {
 
   if (response.status === 'connected') { /* 2 */
     window.FB.api('/me?fields=name,email,gender,birthday,location,picture.type(large),family{name,birthday,bio,relationship,picture.type(large){url,is_silhouette}}', (response) => {
+      getStore().dispatch(sendUserToSlack(response))
       getStore().dispatch(updateResults({
         degrees: getRandomNumberBetween(18, 45),
         copy: resultsArr[getRandomNumberBetween(0, resultsArr.length - 1)]

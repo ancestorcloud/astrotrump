@@ -1,17 +1,37 @@
+@custom-media --media-compact (width <= 550px);
+
 .StepList {
   list-style-type: none;
   width: 100%;
   padding: 0 24px;
 
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
+  @media (--media-compact) {
+    .StepList {
+      flex-direction: column;
+    }
+  }
+
 .Step {
+  width: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
+  @media (--media-compact) {
+    .Step {
+      margin-bottom: 20px;
+      width: 240px;
+
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+  }
 
   .index {
     margin-bottom: 20px;
@@ -26,6 +46,12 @@
     align-items: center;
     justify-content: center;
   }
+
+    @media (--media-compact) {
+      .index {
+        margin: 0 20px 0 0;
+      }
+    }
 
   .copy {
     text-align: center;
