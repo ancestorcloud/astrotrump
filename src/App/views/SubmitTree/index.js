@@ -139,9 +139,9 @@ const SubmitTree = React.createClass({
   componentDidMount () {
     const { dispatch, isAuthenticated } = this.props
 
-    if (!isAuthenticated) {
-      dispatch(replaceWith('/'))
-    }
+    //if (!isAuthenticated) {
+    //  dispatch(replaceWith('/'))
+    //}
 
   },
 
