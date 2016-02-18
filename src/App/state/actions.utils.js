@@ -17,9 +17,22 @@ export const formatName = (fullName) => {
  * string, object -> string
  */
 export const buildCreateIndividualQueryParams = (sessionId, {fullName, birthday, location, gender}) => ({
-  SessionId: sessionId,
-  Name: formatName(fullName),
-  Gender: setGender(gender),
-  BirthDate: convertBirthDate(birthday),
-  BirthPlace: convertBirthPlace(location)
+  sessionId: sessionId,
+  name: formatName(fullName),
+  gender: setGender(gender),
+  birthDate: convertBirthDate(birthday),
+  birthPlace: convertBirthPlace(location)
 })
+
+export const formatEmailForFirebase = (email) => {
+  const key = email.replace('@', '^')
+  if (key.indexOf('.') !== -1) {
+    return key.split('.').join('*')
+  }
+  return key
+}
+
+export function filterIncompleteNodes (node) {
+  const { fullName } = node.data
+  return fullName
+}
