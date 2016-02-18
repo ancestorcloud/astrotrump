@@ -91,16 +91,17 @@ const SubmitTreeUi = ({onTreeSubmit, modalData, onNodeSelect, progress, treeData
       </X>
     </Y>
     <Y y tag='footer' className={style.footer}>
-      <div style={{width: '100%'}}>
-        <h4>Data Completion</h4>
-        <Progress percent={progress} height='25px' />
-      </div>
+
+      <Btn onClick={onTreeSubmit} copy='Match Me To Trump' theme='rust' style={{padding: '15px', margin: '10px 0'}} />
+
+      <TrumpConnection avatarSrc={user.pictureUrl} size='small'/>
 
       <span>Add more information about your family to better match</span>
 
-      <Btn onClick={onTreeSubmit} copy='See Your Relation' theme='rust' style={{padding: '15px', width: '60%'}} />
-
-      <TrumpConnection avatarSrc={user.pictureUrl} size='small'/>
+      <div style={{width: '100%'}}>
+        <h4>Family Information</h4>
+        <Progress percent={progress} height='25px' />
+      </div>
     </Y>
     <Footer />
   </div>
@@ -112,7 +113,6 @@ SubmitTreeUi.propTypes = {}
  */
 const calculateProgress = (treeData) => {
   const data = { ...treeData }
-  delete data.user /* [1] */
   const treeNodes = Object.keys(data)
   const progress = treeNodes
     .reduce((prev, curr) =>

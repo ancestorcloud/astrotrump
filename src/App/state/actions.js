@@ -5,7 +5,6 @@ import { createAsyncActions as aa } from 'utils.redux'
 import Bluebird from 'bluebird'
 import {
   buildCreateIndividualQueryParams,
-  formatEmailForFirebase,
   filterIncompleteNodes
 } from './actions.utils.js'
 import { userFbRef, formatEmailForFirebase } from 'utils.firebase'
