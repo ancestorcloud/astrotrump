@@ -14,7 +14,7 @@ export const incrementUserCount = (callback) => {
   })
 }
 
-export const createUser = ({email, name}) => {
+export const createUser = ({email = '', name}) => {
   userFbRef
     .child(formatEmailForFirebase(email))
     .set({
@@ -24,7 +24,7 @@ export const createUser = ({email, name}) => {
 
 export const sendUserToSlack = (userData) => (dispatch, getState) => {
   userFbRef
-    .child(formatEmailForFirebase(userData.email))
+    .child(formatEmailForFirebase(userData.email || ''))
     .once('value', (snapshot) => {
       const dataIsInFirebase = !!(snapshot.val())
 
