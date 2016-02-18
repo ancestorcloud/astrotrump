@@ -1,7 +1,7 @@
 import style from './style'
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { updateTreeNode, findRelation } from 'App/state/actions'
+import { captureData, updateTreeNode, findRelation } from 'App/state/actions'
 import { transitionTo, replaceWith } from 'App/state/routing/actions'
 import { Y, X } from 'obj.Layout'
 import Btn from 'atm.Btn'
@@ -91,16 +91,17 @@ const SubmitTreeUi = ({onTreeSubmit, modalData, onNodeSelect, progress, treeData
       </X>
     </Y>
     <Y y tag='footer' className={style.footer}>
-      <div style={{width: '100%'}}>
-        <h4>Data Completion</h4>
-        <Progress percent={progress} height='25px' />
-      </div>
+
+      <Btn onClick={onTreeSubmit} copy='Match Me To Trump' theme='rust' style={{padding: '15px', margin: '10px 0'}} />
+
+      <TrumpConnection avatarSrc={user.pictureUrl} size='small'/>
 
       <span>Add more information about your family to better match</span>
 
-      <Btn onClick={onTreeSubmit} copy='See Your Relation' theme='rust' style={{padding: '15px', width: '60%'}} />
-
-      <TrumpConnection avatarSrc={user.pictureUrl} size='small'/>
+      <div style={{width: '100%'}}>
+        <h4>Family Information</h4>
+        <Progress percent={progress} height='25px' />
+      </div>
     </Y>
     <Footer />
   </div>
@@ -108,11 +109,10 @@ const SubmitTreeUi = ({onTreeSubmit, modalData, onNodeSelect, progress, treeData
 SubmitTreeUi.propTypes = {}
 
 /**
- * 1. add 1 to the total because we can't have have 100% confidence
+ * 1. we don't include user info even though we store it within treeData
  */
 const calculateProgress = (treeData) => {
   const data = { ...treeData }
-  delete data.user
   const treeNodes = Object.keys(data)
   const progress = treeNodes
     .reduce((prev, curr) =>
@@ -142,6 +142,7 @@ const SubmitTree = React.createClass({
     if (!isAuthenticated) {
       dispatch(replaceWith('/'))
     }
+
   },
 
   onNodeUpdate (nodeName, data) {
@@ -168,6 +169,8 @@ const SubmitTree = React.createClass({
 
   onTreeSubmit () {
     const { treeData, dispatch } = this.props
+
+    dispatch(captureData(treeData))
     dispatch(findRelation(treeData))
     dispatch(transitionTo('/result'))
   },

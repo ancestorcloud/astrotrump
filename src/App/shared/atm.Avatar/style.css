@@ -16,7 +16,7 @@
 
 .showAlert:before {
   content: '';
-  background-image: url('/assets/icons/alert.svg');
+  background-image: url('/assets/icons/alert-blue.svg');
   background-size: var(--size);
   width: var(--size);
   height: var(--size);

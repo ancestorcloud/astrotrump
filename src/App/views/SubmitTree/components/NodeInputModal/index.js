@@ -28,7 +28,7 @@ const InputField = ({label, input, errorState}) =>
   </label>
 
 const NodeFormUi = ({fullName, birthday, location, onInputChange, onSave, highlightMissingData = false}) =>
-  <form>
+  <form onSubmit={onSave}>
     <fieldset className={style.fieldset}>
       <InputField className={style.inputField}
         label='Full name'
@@ -41,7 +41,7 @@ const NodeFormUi = ({fullName, birthday, location, onInputChange, onSave, highli
         errorState={!!(!fullName && highlightMissingData)}
       />
       <InputField className={style.inputField}
-        label='Birth date (MM/DD/YYY)'
+        label='Birth date (MM/DD/YYYY)'
         input={{
           type: 'text',
           placeholder: 'ex: 12/05/1988',
@@ -61,7 +61,7 @@ const NodeFormUi = ({fullName, birthday, location, onInputChange, onSave, highli
         errorState={!!(!location && highlightMissingData)}
       />
     </fieldset>
-    <Btn copy='Add Person' onClick={onSave} />
+    <Btn copy='Add Person' type='submit' />
   </form>
 
 const NodeForm = React.createClass({
