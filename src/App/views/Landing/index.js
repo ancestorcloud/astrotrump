@@ -43,7 +43,7 @@ const statusChangeCallback = (response /* 1 */) => {
  */
 window.fbAsyncInit = () => {
   let appId = '1427298800906536' // prod
-  if (__DEV__) { appId = '1511974445772304' } /* es-lint */
+  if (__DEV__) { appId = '1511974445772304' } // eslint-disable-line
 
   window.FB.init({
     appId,
