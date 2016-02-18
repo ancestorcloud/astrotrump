@@ -1,6 +1,9 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import style from './style'
+
+import { getStore } from 'redux.store'
+import { replaceWith } from 'App/state/routing/actions'
 
 import TrumpConnection from 'mol.TrumpConnection'
 import Footer from 'org.Footer'
@@ -20,7 +23,7 @@ const getSuffix = (number) => {
   return suffixMap[unit] || 'th'
 }
 
-const Result = ({
+const ResultUI = ({
   session: {
     user,
     results: {
@@ -126,10 +129,17 @@ const Result = ({
   )
 }
 
-Result.propTypes = {
-  session: PropTypes.object,
-  degrees: PropTypes.number
-}
+const Result = React.createClass({
+  componentWillMount () {
+    if (!this.props.session.status) getStore().dispatch(replaceWith('/'))
+  },
+
+  render () {
+    return this.props.session.status
+    ? ResultUI(this.props)
+    : <div />
+  }
+})
 
 export default connect(({session, ogfResults}) => ({
   session,

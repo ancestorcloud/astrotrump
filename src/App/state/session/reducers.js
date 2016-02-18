@@ -17,7 +17,7 @@ const initialState = {
     family: []
   },
   authResponse: {},
-  status: ''
+  status: undefined
 }
 
 export const session = createReducer(initialState, {
