@@ -43,7 +43,7 @@ const ResultUI = ({
   const degreeWithSuffix = `${degrees}${getSuffix(degrees)}`
 
   const shareData = {
-    link: 'https://cousintrump.com',
+    link: 'http://cousintrump.com',
     title: `I'm ${degreeWithSuffix} cousins with Donald Trump!`,
     description: 'You might be related to Trump as well. Discover the truth now! #CousinTrump',
     facebookBannerImage: 'http://i.imgur.com/rYSxqyU.jpg'
