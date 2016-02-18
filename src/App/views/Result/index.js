@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import style from './style'
 
-import { getStore } from 'redux.store'
 import { replaceWith } from 'App/state/routing/actions'
 
 import TrumpConnection from 'mol.TrumpConnection'
@@ -131,7 +130,7 @@ const ResultUI = ({
 
 const Result = React.createClass({
   componentWillMount () {
-    if (!this.props.session.status) getStore().dispatch(replaceWith('/'))
+    if (!this.props.session.status) this.props.dispatch(replaceWith('/'))
   },
 
   render () {
