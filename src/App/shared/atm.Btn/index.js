@@ -17,7 +17,7 @@ const Btn = ({copy, theme = 'navy', iconSrc, ...props}) => (
 )
 
 Btn.propTypes = {
-  copy: PropTypes.string,
+  copy: PropTypes.oneOf([ PropTypes.string, PropTypes.node ]),
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   children: PropTypes.node,
