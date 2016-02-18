@@ -80,7 +80,7 @@ const ResultUI = ({
                 <div>
                   <Btn
                     iconSrc='/images/facebook.svg'
-                    copy='Share your cousin'
+                    copy={<div style={{width:'200px'}}>Share your cousin</div>}
                     theme='facebook'
                     onClick={() => window.FB.ui({
                       method: 'feed',
