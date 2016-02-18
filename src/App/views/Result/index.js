@@ -92,20 +92,6 @@ const ResultUI = ({
                     })}
                   />
                 </div>
-                <div>
-                  <Btn
-                    iconSrc='/images/twitter.svg'
-                    copy='Share your cousin'
-                    theme='twitter'
-                    onClick={() => {
-                      window.open(
-                        `https://twitter.com/intent/tweet?text=${shareData.title} ${shareData.link}`,
-                        '',
-                        'fullscreen=0,height=400,width=600'
-                      )
-                    }}
-                  />
-                </div>
               </div>
               <hr style={{
                 border: 'none',
