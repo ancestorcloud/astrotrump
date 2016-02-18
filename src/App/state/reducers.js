@@ -1,6 +1,11 @@
 import { combineReducers } from 'redux'
 import { createReducer } from 'utils.redux'
-import { UPDATE_TREE_NODE } from './actions'
+import {
+  UPDATE_TREE_NODE,
+  OGF_RESULTS,
+  OGF_RESULTS_SUCCESS,
+  OGF_RESULTS_FAILURE
+} from './actions'
 import {
   USER_UPDATE_FACEBOOK_DATA
 } from 'App/state/session/actions'
@@ -58,6 +63,17 @@ const updateTreeNode = (state, { payload: { nodeName, data } }) => (nodeName ===
   }
   : state
 
+const initialUserState = {
+  fieldsComplete: true,
+  highlightMissingData: false,
+  pictureUrl: 'http://static.giantbomb.com/uploads/original/0/31/11738-ssj_goku.jpg',
+  data: {
+    fullName: 'Son Goku',
+    birthday: '09/15/1956',
+    location: 'New York, NY'
+  }
+}
+
 const initialDefaultState = {
   fieldsComplete: false,
   highlightMissingData: false,
@@ -68,6 +84,26 @@ const initialDefaultState = {
     location: ''
   }
 }
+
+export const ogfResults = createReducer({}, {
+
+  [OGF_RESULTS]: (state, { payload: { isFetching } }) => ({
+    ...state,
+    isFetching
+  }),
+
+  [OGF_RESULTS_SUCCESS]: (state, { payload: { degrees, isFetching } }) => ({
+    ...state,
+    degrees,
+    isFetching
+  }),
+
+  [OGF_RESULTS_FAILURE]: (state, { payload: { isFetching } }) => ({
+    ...state,
+    isFetching
+  })
+
+})
 
 export const user = createReducer({
   id: 'user',
