@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Firebase from 'firebase'
 import zipWith from 'lodash.zipwith'
 import { createAsyncActions as aa } from 'utils.redux'
 import Bluebird from 'bluebird'
@@ -8,8 +7,6 @@ import {
   filterIncompleteNodes
 } from './actions.utils.js'
 import { userFbRef, formatEmailForFirebase } from 'utils.firebase'
-
-const fbRef = new Firebase('https://astrotrump.firebaseio.com/users')
 
 export const [
   OGF_RESULTS,
@@ -113,7 +110,7 @@ export const findRelation = (treeData) => (dispatch, getState) => {
       )
       return findRelationship(
         ogfSessionId,
-        [ trump, me.ogfnid]
+        [trump, me.ogfnid]
       )
       .then(validateResponse)
     })
@@ -154,7 +151,7 @@ const failureResult = {
 const beginResult = {
   type: OGF_RESULTS,
   payload: {
-    isFetching: true,
+    isFetching: true
   }
 }
 
@@ -183,7 +180,7 @@ function promiseTimer (delay) {
 }
 
 function waitForMatch (sessionId, jobId) {
-    return checkJobStatus(sessionId, jobId)
+  return checkJobStatus(sessionId, jobId)
     .then(validateResponse)
     .then(jobStatus => {
       if (jobStatus.TotalProgress !== 100) {
@@ -239,7 +236,6 @@ function addRelationships (sessionId, individuals) {
   } = tree
 
   let relationshipResponses = []
-
 
   if (!user) {
     return []
@@ -320,7 +316,7 @@ function matchNow (sessionId, ogfnids) {
 
 }
 
-function findPerson(id, individual) {
+function findPerson (id, individual) {
   return id === individual.id
 }
 
@@ -346,23 +342,3 @@ function zipperHelper (ogfnid, individual) {
     ogfnid
   }
 }
-
-  // do client side validations on treeData
-  // if not enough, dispatch error state
-
-  /* http://wsdev.onegreatfamily.com/v11.02/Individual.svc/CreateUpdate?
-    [ ]SessionId=gl4q23cwofpshi55sg1dvc3o&
-    IndiOgfn=123456&
-    [ ]Name=John/Smith&
-    [ ]Gender=Male&
-    [ ]BirthDate=Jan 1 1900&
-    [ ]BirthPlace=Phoenix,Arizona,USA&&
-    ChristeningDate=Feb 1 1900&
-    ChristeningPlace=Phoenix,ArizonaUSA&
-    DeathDate=Feb 6 1960&
-    DeathPlace=Phoenix,ArizonaUSA&
-    BurialDate=Feb 13 1960&
-    BurialPlace=Phoenix,ArizonaUSA&
-    Email=johns@gone.com&
-    lockId=12666600
-  */
