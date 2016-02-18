@@ -13,6 +13,8 @@
   padding-bottom: calc(var(--degreeCircleSize) - var(--degreeCircleOverlap));
   display: flex;
   align-items: center;
+  position: relative;
+  z-index: 0;
 }
 
   .wrapper-small {
