@@ -43,11 +43,11 @@ test('formats name as One Great Family expects', t => {
 
 test('builds query params as an object with formats that One Great Family is expecting', t => {
   const expected = {
-    SessionId: 'sessionid',
-    Name: 'Mikey/Murphy',
-    Gender: 'Male',
-    BirthDate: 'Dec 5 1988',
-    BirthPlace: 'SimiValley,CA'
+    sessionId: 'sessionid',
+    name: 'Mikey/Murphy',
+    gender: 'Male',
+    birthDate: 'Dec 5 1988',
+    birthPlace: 'SimiValley,CA'
   }
 
   const result = buildCreateIndividualQueryParams('sessionid', {

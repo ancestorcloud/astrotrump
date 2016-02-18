@@ -129,24 +129,6 @@ Result.propTypes = {
   degrees: PropTypes.number
 }
 
-export default connect(state => {
-
-  const { user } = state.treeData
-
-  return {
-    session: {
-      user: {
-        ...user,
-        picture: {
-          data: {
-            url: user.pictureUrl
-          }
-        }
-      },
-      results: {
-        degrees: 47,
-        copy: 'yolo swag'
-      }
-    }
-  }
-})(Result)
+export default connect(({session}) => ({
+  session
+}))(Result)

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { userFbRef, formatEmailForFirebase } from 'utils.firebase'
+import Firebase from 'firebase'
 import zipWith from 'lodash.zipwith'
 import { createAsyncActions as aa } from 'utils.redux'
 import Bluebird from 'bluebird'
@@ -7,6 +7,9 @@ import {
   buildCreateIndividualQueryParams,
   filterIncompleteNodes
 } from './actions.utils.js'
+import { userFbRef, formatEmailForFirebase } from 'utils.firebase'
+
+const fbRef = new Firebase('https://astrotrump.firebaseio.com/users')
 
 export const [
   OGF_RESULTS,
@@ -344,26 +347,6 @@ function zipperHelper (ogfnid, individual) {
   }
 }
 
-function createRelationship (sessionId, ogfnids) {
-
-  const url = 'http://wsdev.onegreatfamily.com/v11.02/Individual.svc/AddIndiAsRelation'
-  const [ogfnid1, ogfnid2] = ogfnids
-
-  const relationshipResponse = axios.get(url, {
-    params: {
-      sessionId,
-      ogfnid1,
-      ogfnid2
-    }
-  })
-  .then(validateResponse)
-
-  return relationshipResponse
-}
-
-function createRelationships (sessionId, individuals) {
-
-}
   // do client side validations on treeData
   // if not enough, dispatch error state
 

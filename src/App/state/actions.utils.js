@@ -24,6 +24,14 @@ export const buildCreateIndividualQueryParams = (sessionId, {fullName, birthday,
   birthPlace: convertBirthPlace(location)
 })
 
+export const formatEmailForFirebase = (email) => {
+  const key = email.replace('@', '^')
+  if (key.indexOf('.') !== -1) {
+    return key.split('.').join('*')
+  }
+  return key
+}
+
 export function filterIncompleteNodes (node) {
   const { fullName } = node.data
   return fullName
