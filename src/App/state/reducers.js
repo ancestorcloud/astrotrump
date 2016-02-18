@@ -63,17 +63,6 @@ const updateTreeNode = (state, { payload: { nodeName, data } }) => (nodeName ===
   }
   : state
 
-const initialUserState = {
-  fieldsComplete: true,
-  highlightMissingData: false,
-  pictureUrl: 'http://static.giantbomb.com/uploads/original/0/31/11738-ssj_goku.jpg',
-  data: {
-    fullName: 'Son Goku',
-    birthday: '09/15/1956',
-    location: 'New York, NY'
-  }
-}
-
 const initialDefaultState = {
   fieldsComplete: false,
   highlightMissingData: false,
@@ -109,7 +98,7 @@ export const user = createReducer({
   id: 'user',
   title: 'You',
   gender: '',
-  ...initialUserState
+  ...initialDefaultState
 }, {
 
   [USER_UPDATE_FACEBOOK_DATA]: (state, { payload: user }) => ({
