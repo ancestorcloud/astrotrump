@@ -42,8 +42,11 @@ const statusChangeCallback = (response /* 1 */) => {
  * 2. parse social plugins on this page
  */
 window.fbAsyncInit = () => {
+  let appId = '1427298800906536' // prod
+  if (__DEV__) { appId = '1511974445772304' } /* es-lint */
+
   window.FB.init({
-    appId: '1427298800906536',
+    appId,
     cookie: true,   /* 1 */
     xfbml: true,    /* 2 */
     version: 'v2.5'
