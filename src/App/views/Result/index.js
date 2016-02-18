@@ -41,7 +41,7 @@ const Result = React.createClass({
     const shareData = {
       link: 'https://cousintrump.com',
       title: `I'm ${degreeWithSuffix} cousins with Donald Trump!`,
-      description: `You might be related to the iconoclastic business magnate and presidential candidate as well. Click here to find out!`,
+      description: `You might be related to Trump as well. Discover the truth now! #CousinTrump`,
       facebookBannerImage: 'http://i.imgur.com/rYSxqyU.jpg'
     }
 
