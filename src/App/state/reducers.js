@@ -73,7 +73,8 @@ export const user = createReducer({
   id: 'user',
   title: 'You',
   gender: '',
-  ...initialDefaultState
+  ...initialDefaultState,
+  fieldsComplete: true
 }, {
 
   [USER_UPDATE_FACEBOOK_DATA]: (state, { payload: user }) => ({
