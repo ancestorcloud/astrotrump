@@ -14,7 +14,8 @@ const [
 
 const initialState = {
   user: {
-    family: []
+    family: [],
+    email: ''
   },
   authResponse: {},
   status: undefined
