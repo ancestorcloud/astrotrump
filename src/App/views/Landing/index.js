@@ -1,5 +1,5 @@
 import style from './style'
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { getStore } from 'redux.store'
 import { transitionTo } from 'App/state/routing/actions'
@@ -12,7 +12,7 @@ import StepList from './components/StepList'
 
 import resultsArr from './results.js'
 
-import { updateAuthResponse, updateFacebookUserData, updateResults } from 'App/state/session/actions'
+import { facebookSdkLoaded, updateAuthResponse, updateFacebookUserData, updateResults } from 'App/state/session/actions'
 
 const getRandomNumberBetween = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
@@ -51,6 +51,8 @@ window.fbAsyncInit = () => {
     xfbml: true,    /* 2 */
     version: 'v2.5'
   })
+
+  getStore().dispatch(facebookSdkLoaded())
 
   window.FB.getLoginStatus((response) => {
     statusChangeCallback(response)
@@ -110,7 +112,7 @@ const Landing = ({
           />
         </div>
         <div className={style.description}>See how closely related you are to Donald Trump</div>
-        <a onClick={login}>
+        <a onClick={session && session.facebookSdkLoaded ? login : () => {}}>
           <Btn
             theme='facebook'
             iconSrc='/images/facebook.svg'
@@ -137,12 +139,6 @@ const Landing = ({
       />
     </div>
   )
-}
-
-Landing.propTypes = {
-  session: PropTypes.object,
-
-  transitionTo: PropTypes.func
 }
 
 export default connect(({session}) => ({

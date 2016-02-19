@@ -1,10 +1,15 @@
 import { createAsyncActions as aa } from 'utils.redux'
 import axios from 'axios'
 
+export const FACEBOOK_SDK_LOADED = 'FACEBOOK_SDK_LOADED'
 export const AUTH_UPDATE = 'AUTH_UPDATE'
 export const USER_UPDATE_FACEBOOK_DATA = 'USER_UPDATE_FACEBOOK_DATA'
 export const USER_UPDATE_RESULTS = 'USER_UPDATE_RESULTS'
 export const RECEIVE_SESSION_ID_ACTION_TYPES = aa('RECEIVE_SESSION_ID')
+
+export const facebookSdkLoaded = () => ({
+  type: FACEBOOK_SDK_LOADED
+})
 
 export const updateAuthResponse = (authResponse, status) => ({
   type: AUTH_UPDATE,
@@ -24,7 +29,6 @@ export const updateResults = (data) => ({
   payload: data
 })
 
-
 export const receivedSessionId = (value) => ({
   type: RECEIVE_SESSION_ID_ACTION_TYPES[1],
   payload: {
@@ -33,13 +37,12 @@ export const receivedSessionId = (value) => ({
 })
 
 export const ogfLogin = () => (dispatch, getState) => {
-
   const url = 'https://wsdev.onegreatfamily.com/v11.02/User.svc/Signin'
   const credentials = {
-     userName: 'anderson_peter@live.com',
-     password: 'banana',
-     developerId: 'AncestorCloud',
-     developerPassword: '492C4DD9-A129-4146-BAE9-D0D45FBC315C'
+    userName: 'anderson_peter@live.com',
+    password: 'banana',
+    developerId: 'AncestorCloud',
+    developerPassword: '492C4DD9-A129-4146-BAE9-D0D45FBC315C'
   }
 
   axios.get(url, {
@@ -51,9 +54,8 @@ export const ogfLogin = () => (dispatch, getState) => {
     }
     dispatch(receivedSessionId(Value))
   })
-  .catch(err => {
+  .catch((err) => {
     // Try again...
     console.err(err)
   })
-
 }
