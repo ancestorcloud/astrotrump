@@ -37,6 +37,7 @@ module.exports = {
             '</script>',
             '<meta charset="utf-8"/>',
             '<meta name="viewport" content="width=device-width, initial-scale=1">',
+            '<meta name="google-site-verification" content="tWYw7W_XEnUXXzlEAbnZfzUo8Y8Z7uti_fLw3IS4aYQ" />',
             '<title>' + config.title + '</title>',
             '<link rel="icon" href="' + config.favicon + '" type="image/x-icon" />',
             '<link href="/' + data.css + '" rel="stylesheet" type="text/css" />',
