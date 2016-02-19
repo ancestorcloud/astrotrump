@@ -39,7 +39,7 @@ module.exports = {
             '<meta name="viewport" content="width=device-width, initial-scale=1">',
             '<title>' + config.title + '</title>',
             '<link rel="icon" href="' + config.favicon + '" type="image/x-icon" />',
-            '<link rel="image_src" href="/images/are_you_related_trump.jpg" / >',
+            '<link rel="image_src" href="http://cousintrump.com/images/are_you_related_trump.jpg" / >',
             '<link href="/' + data.css + '" rel="stylesheet" type="text/css" />',
             '<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet" type="text/css">',
             '<script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){' +
