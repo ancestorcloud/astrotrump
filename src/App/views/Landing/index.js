@@ -58,8 +58,12 @@ window.fbAsyncInit = () => {
 }
 
 const login = () => {
-  window.FB.login(() => {
-    window.FB.getLoginStatus((response) => {
+  const { FB } = window
+
+  if (!FB) return
+
+  FB.login(() => {
+    FB.getLoginStatus((response) => {
       statusChangeCallback(response)
     })
   }, {
