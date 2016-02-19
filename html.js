@@ -38,8 +38,13 @@ module.exports = {
             '<meta charset="utf-8"/>',
             '<meta name="viewport" content="width=device-width, initial-scale=1">',
             '<title>' + config.title + '</title>',
+
+            '<meta property="og:url"                content="https://cousintrump.com/" />',
+            '<meta property="og:title"              content="Cousin Trump" />',
+            '<meta property="og:description"        content="See how closely you are related to Donald Trump." />',
+            '<meta property="og:image"              content="https://cousintrump.com/images/are_you_related_trump.jpg" />',
+
             '<link rel="icon" href="' + config.favicon + '" type="image/x-icon" />',
-            '<link rel="image_src" href="http://cousintrump.com/images/are_you_related_trump.jpg" / >',
             '<link href="/' + data.css + '" rel="stylesheet" type="text/css" />',
             '<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet" type="text/css">',
             '<script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){' +
