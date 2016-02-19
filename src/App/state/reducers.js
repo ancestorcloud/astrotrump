@@ -56,6 +56,9 @@ const updateTreeNode = (state, { payload: { nodeName, data } }) => (nodeName ===
   ? {
     ...state,
     fieldsComplete: fieldsAreComplete(data),
+    fullNameIsValid: !!data.fullName,
+    birthdayIsValid: !!data.birthday,
+    locationIsValid: !!data.birthday,
     data: {
       ...state.data,
       ...data
@@ -66,6 +69,9 @@ const updateTreeNode = (state, { payload: { nodeName, data } }) => (nodeName ===
 const initialDefaultState = {
   fieldsComplete: false,
   highlightMissingData: false,
+  fullNameIsValid: false,
+  birthdayIsValid: false,
+  locationIsValid: false,
   pictureUrl: '',
   data: {
     fullName: '',
@@ -99,7 +105,10 @@ export const user = createReducer({
   title: 'You',
   gender: '',
   ...initialDefaultState,
-  fieldsComplete: true
+  fieldsComplete: true,
+  fullNameIsValid: true,
+  birthdayIsValid: true,
+  locationIsValid: true
 }, {
 
   [USER_UPDATE_FACEBOOK_DATA]: (state, { payload: user }) => ({
