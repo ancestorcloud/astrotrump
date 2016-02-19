@@ -3,6 +3,7 @@ import thunkMiddleware from 'redux-thunk'
 import { routerStateReducer, reduxReactRouter } from 'redux-router'
 import createHistory from 'history/lib/createHashHistory'
 import apiMiddleware from 'config.api'
+import analyticsMiddleware from 'redux.middleware/analytics'
 import * as reducers from 'redux.reducers'
 import routes from 'config.routes'
 
@@ -17,7 +18,8 @@ const coreMiddleware = compose(
   reduxReactRouter({ routes, createHistory }),
   applyMiddleware(
     thunkMiddleware,
-    apiMiddleware
+    apiMiddleware,
+    analyticsMiddleware
   )
 )
 
