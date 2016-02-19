@@ -26,6 +26,8 @@ const findRelationshipData = (relation, data) => {
 const extractFbData = ({birthday, name, picture}, data) => ({
   pictureUrl: picture && picture.data && picture.data.url,
   highlightMissingData: true,
+  fullNameIsValid: !!name,
+  birthdayIsValid: !!birthday,
   data: {
     ...data,
     birthday: birthday || '',
