@@ -1,5 +1,6 @@
 import { createReducer } from 'utils.redux'
 import {
+  FACEBOOK_SDK_LOADED,
   USER_UPDATE_FACEBOOK_DATA,
   AUTH_UPDATE,
   USER_UPDATE_RESULTS,
@@ -13,6 +14,7 @@ const [
 ] = RECEIVE_SESSION_ID_ACTION_TYPES
 
 const initialState = {
+  facebookSdkLoaded: false,
   user: {
     family: [],
     email: ''
@@ -22,6 +24,11 @@ const initialState = {
 }
 
 export const session = createReducer(initialState, {
+  [FACEBOOK_SDK_LOADED]: (state) => ({
+    ...state,
+    facebookSdkLoaded: true
+  }),
+
   [AUTH_UPDATE]: (state, { payload: { authResponse, status } }) => ({
     ...state,
     authResponse,
