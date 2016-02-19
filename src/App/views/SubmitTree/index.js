@@ -116,9 +116,17 @@ const calculateProgress = (treeData) => {
   const treeNodes = Object.keys(data)
   const progress = treeNodes
     .reduce((prev, curr) =>
-      prev + Number(treeData[curr].fieldsComplete),
-    0) / treeNodes.length
+      prev + calcValue(treeData[curr]),
+    0) / (treeNodes.length * 3)
   return progress * 100
+
+  function calcValue ({fullNameIsValid, birthdayIsValid, locationIsValid}) {
+    let val = 0
+    if (fullNameIsValid) val++
+    if (birthdayIsValid) val++
+    if (locationIsValid) val++
+    return val
+  }
 }
 
 const SubmitTree = React.createClass({
