@@ -1,5 +1,6 @@
 import { createAsyncActions as aa } from 'utils.redux'
 import axios from 'axios'
+import { ogfCreds } from 'utils.firebase'
 
 export const AUTH_UPDATE = 'AUTH_UPDATE'
 export const USER_UPDATE_FACEBOOK_DATA = 'USER_UPDATE_FACEBOOK_DATA'
@@ -34,26 +35,25 @@ export const receivedSessionId = (value) => ({
 
 export const ogfLogin = () => (dispatch, getState) => {
 
-  const url = 'https://wsdev.onegreatfamily.com/v11.02/User.svc/Signin'
-  const credentials = {
-     userName: 'anderson_peter@live.com',
-     password: 'banana',
-     developerId: 'AncestorCloud',
-     developerPassword: '492C4DD9-A129-4146-BAE9-D0D45FBC315C'
-  }
+  const url = 'https://ws.onegreatfamily.com/v11.02/User.svc/Signin'
+  ogfCreds.on('value', snapshot => {
+    const credentials = snapshot.val() 
+    console.log(credentials)
 
-  axios.get(url, {
-    params: credentials
+    axios.get(url, {
+      params: credentials
+    })
+    .then(({ data: { Value, Code, Message } }) => {
+      if (Code !== 0) {
+        throw new Error(Message)
+      }
+      dispatch(receivedSessionId(Value))
+    })
+    .catch(err => {
+      // Try again...
+      console.error(err)
+    })
   })
-  .then(({ data: { Value, Code, Message } }) => {
-    if (Code !== 0) {
-      throw new Error(Message)
-    }
-    dispatch(receivedSessionId(Value))
-  })
-  .catch(err => {
-    // Try again...
-    console.err(err)
-  })
+
 
 }

@@ -62,7 +62,7 @@ export const findRelation = (treeData) => (dispatch, getState) => {
 
   dispatch(beginResult)
 
-  const url = 'https://wsdev.onegreatfamily.com/v11.02/Individual.svc/CreateUpdate'
+  const url = 'https://ws.onegreatfamily.com/v11.02/Individual.svc/CreateUpdate'
 
   /**
    * creating and array of axios get requests for each individual we need
@@ -157,7 +157,7 @@ const beginResult = {
 
 function findRelationship (sessionId, [indiogfn1, indiogfn2], type='ANY') {
 
-  const url = 'https://wsdev.onegreatfamily.com/v11.02/Individual.svc/RelationshipFind'
+  const url = 'https://ws.onegreatfamily.com/v11.02/Individual.svc/RelationshipFind'
 
   return axios.get(url, {
     params: {
@@ -194,7 +194,7 @@ function waitForMatch (sessionId, jobId) {
 
 function checkJobStatus (sessionId, jobId) {
 
-  const url = 'https://wsdev.onegreatfamily.com/v11.02/Status.svc/MatchStatus'
+  const url = 'https://ws.onegreatfamily.com/v11.02/Status.svc/MatchStatus'
 
   return axios.get(url, {
     params: {
@@ -207,7 +207,7 @@ function checkJobStatus (sessionId, jobId) {
 
 function addRelationship (sessionId, [indiOgfn, relatedIndiOgfn], type) {
 
-  const url = 'https://wsdev.onegreatfamily.com/v11.02/Individual.svc/AddIndiAsRelation'
+  const url = 'https://ws.onegreatfamily.com/v11.02/Individual.svc/AddIndiAsRelation'
 
   return axios.get(url, {
     params: {
@@ -305,7 +305,7 @@ function addRelationships (sessionId, individuals) {
 
 function matchNow (sessionId, ogfnids) {
 
-  const url = 'https://wsdev.onegreatfamily.com/v11.02/Individual.svc/MatchNow'
+  const url = 'https://ws.onegreatfamily.com/v11.02/Individual.svc/MatchNow'
 
   return axios.get(url, {
     params: {
