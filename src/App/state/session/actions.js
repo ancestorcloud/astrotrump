@@ -37,8 +37,7 @@ export const ogfLogin = () => (dispatch, getState) => {
 
   const url = 'https://ws.onegreatfamily.com/v11.02/User.svc/Signin'
   ogfCreds.on('value', snapshot => {
-    const credentials = snapshot.val() 
-    console.log(credentials)
+    const credentials = snapshot.val()
 
     axios.get(url, {
       params: credentials
