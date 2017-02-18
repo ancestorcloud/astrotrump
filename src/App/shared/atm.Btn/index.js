@@ -3,16 +3,19 @@ import React, { PropTypes } from 'react'
 import CSSModules from 'react-css-modules'
 
 const Btn = ({copy, theme = 'navy', iconSrc, ...props}) => (
-  <button { ...props } styleName={`${theme}${iconSrc ? ' iconCopy' : ''}`}>
-    {
-      iconSrc
-      ? <img
-        styleName='icon'
-        src={iconSrc}
-      />
-      : undefined
-    }
-    <span styleName='copy'>{copy}</span>
+  <button {...{
+    ...props,
+    styleName: `${theme}${iconSrc ? ' iconCopy' : ''}`
+  }}>
+    <div styleName='flex'>
+      {iconSrc &&
+        <img
+          styleName='icon'
+          src={iconSrc}
+        />
+      }
+      <span styleName='copy'>{copy}</span>
+    </div>
   </button>
 )
 

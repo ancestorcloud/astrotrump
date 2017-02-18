@@ -28,7 +28,8 @@ const ResultUI = ({
     results: {
       degrees: randomDegrees,
       copy: resultCopy
-    }
+    },
+    selectedPresident
   },
   ogfResults: {
     isFetching,
@@ -44,8 +45,8 @@ const ResultUI = ({
 
   const shareData = {
     link: 'https://cousintrump.com',
-    title: `I'm ${degreeWithSuffix} cousins with Donald Trump!`,
-    description: 'You might be related to Trump as well. Discover the truth now! #CousinTrump',
+    title: `I'm ${degreeWithSuffix} cousins with ${selectedPresident.name}!`,
+    description: `You might be related to ${selectedPresident.lastName} as well. Discover the truth now! #Cousin${selectedPresident.lastName}`,
     facebookBannerImage: 'http://i.imgur.com/rYSxqyU.jpg'
   }
 
@@ -62,6 +63,7 @@ const ResultUI = ({
           paddingBottom: degrees ? '0' : '64px' /* 1 */
         }}>
           <TrumpConnection
+            president={selectedPresident}
             avatarSrc={user && user.picture && user.picture.data && user.picture.data.url}
             degrees={degrees || undefined}
             size='big'
@@ -74,7 +76,7 @@ const ResultUI = ({
         ? (
           <div className={style.explainerWrapper}>
             <div className={style.explainer}>
-              <h2>You are {degreeWithSuffix} cousins with Donald</h2>
+              <h2>You are {degreeWithSuffix} cousins with {selectedPresident.firstName}</h2>
               <div>{resultCopy}</div>
               <div className={style.buttonsWrapper}>
                 <div>
@@ -99,11 +101,11 @@ const ResultUI = ({
                 height: '3px',
                 backgroundColor: '#aaa'
               }}/>
-              <h2>#CousinTrump</h2>
+              <h2>#Cousin{selectedPresident.lastName}</h2>
               <h3 style={{
                 textAlign: 'center'
               }}>How did we know?</h3>
-              <div>Based on family data almost any two people can be matched to a common ancestor. We've got a global family tree with information on most people's ancestors. To accurately determine your common ancestor with Trump we need a little bit more info about your family. Your info is always kept private.</div>
+              <div>{`Based on family data almost any two people can be matched to a common ancestor. We've got a global family tree with information on most people's ancestors. To accurately determine your common ancestor with Trump we need a little bit more info about your family. Your info is always kept private.`}</div>
               <Footer />
             </div>
           </div>

@@ -4,6 +4,7 @@ import { ogfCreds } from 'utils.firebase'
 
 export const AUTH_UPDATE = 'AUTH_UPDATE'
 export const USER_UPDATE_FACEBOOK_DATA = 'USER_UPDATE_FACEBOOK_DATA'
+export const USER_UPDATE_SELECTED_PRESIDENT = 'USER_UPDATE_SELECTED_PRESIDENT'
 export const USER_UPDATE_RESULTS = 'USER_UPDATE_RESULTS'
 export const RECEIVE_SESSION_ID_ACTION_TYPES = aa('RECEIVE_SESSION_ID')
 
@@ -17,6 +18,11 @@ export const updateAuthResponse = (authResponse, status) => ({
 
 export const updateFacebookUserData = (data) => ({
   type: USER_UPDATE_FACEBOOK_DATA,
+  payload: data
+})
+
+export const updateSelectedPresident = (data) => ({
+  type: USER_UPDATE_SELECTED_PRESIDENT,
   payload: data
 })
 

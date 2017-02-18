@@ -10,9 +10,9 @@ import Btn from 'atm.Btn'
 import Footer from 'org.Footer'
 import StepList from './components/StepList'
 
-import resultsArr from './results.js'
+import presidents from 'config.definitions'
 
-import { updateAuthResponse, updateFacebookUserData, updateResults } from 'App/state/session/actions'
+import { updateAuthResponse, updateSelectedPresident, updateFacebookUserData, updateResults } from 'App/state/session/actions'
 
 const getRandomNumberBetween = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
@@ -24,6 +24,10 @@ const getRandomNumberBetween = (min, max) => Math.floor(Math.random() * (max - m
  */
 const statusChangeCallback = (response /* 1 */) => {
   getStore().dispatch(updateAuthResponse(response.authResponse, response.status))
+
+  const resultsArr = presidents[0].resultsCopy
+
+  console.log('response: ', response)
 
   if (response.status === 'connected') { /* 2 */
     window.FB.api('/me?fields=name,email,gender,birthday,location,picture.type(large),family{name,birthday,bio,relationship,picture.type(large){url,is_silhouette}}', (response) => {
@@ -89,11 +93,13 @@ const bannerImages = [
 ].map((imageName, i) => <img key={i} src={`/images/bannerImages/${imageName}`} />)
 
 const Landing = ({
-  session,
+  sessionStatusIsConnected,
+  selectedPresident,
 
-  transitionTo
+  transitionTo,
+  updateSelectedPresident
 }) => {
-  if (session.status === 'connected') transitionTo('/tree')
+  if (sessionStatusIsConnected) transitionTo('/tree')
 
   return (
     <div className={style.hero}>
@@ -102,14 +108,33 @@ const Landing = ({
           height='35'
           src='/images/stars.svg'
         />
-        <h1 className={style.siteTitle}>Cousin Trump</h1>
+        <h1 className={style.siteTitle}>Cousin {selectedPresident.lastName}</h1>
         <div className={style.trumpWrapper}>
           <Avatar
-            src='/images/trump.jpg'
+            src={selectedPresident.avatar}
             size={150}
           />
         </div>
-        <div className={style.description}>See how closely related you are to Donald Trump</div>
+        <div className={style.description}>
+          {`See how closely related you are to `}
+          <select {...{
+            style: {
+              textAlign: 'center',
+              color: 'black'
+            },
+            value: selectedPresident.id,
+            onChange: (e) => {
+              console.log(e.target.value)
+              updateSelectedPresident(e.target.value)
+            }
+          }}>
+            {presidents.map(({id, name}) =>
+              <option {...{
+                value: id
+              }}>{name}</option>
+            )}
+          </select>
+        </div>
         <a onClick={login}>
           <Btn
             theme='facebook'
@@ -141,10 +166,13 @@ const Landing = ({
 
 Landing.propTypes = {
   session: PropTypes.object,
-
-  transitionTo: PropTypes.func
+  transitionTo: PropTypes.func,
+  updateSelectedPresident: PropTypes.func
 }
 
+const boundActions = { transitionTo, updateSelectedPresident }
+
 export default connect(({session}) => ({
-  session
-}), { transitionTo })(Landing)
+  sessionStatusIsConnected: session.status === 'connected',
+  selectedPresident: session.selectedPresident
+}), boundActions)(Landing)

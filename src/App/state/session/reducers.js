@@ -1,6 +1,7 @@
 import { createReducer } from 'utils.redux'
 import {
   USER_UPDATE_FACEBOOK_DATA,
+  USER_UPDATE_SELECTED_PRESIDENT,
   AUTH_UPDATE,
   USER_UPDATE_RESULTS,
   RECEIVE_SESSION_ID_ACTION_TYPES
@@ -12,11 +13,14 @@ const [
   RECEIVE_SESSION_ID_FAILURE
 ] = RECEIVE_SESSION_ID_ACTION_TYPES
 
+import presidents from 'config.definitions'
+
 const initialState = {
   user: {
     family: [],
     email: ''
   },
+  selectedPresident: presidents[0],
   authResponse: {},
   status: undefined
 }
@@ -34,6 +38,11 @@ export const session = createReducer(initialState, {
       ...state.user,
       ...user
     }
+  }),
+
+  [USER_UPDATE_SELECTED_PRESIDENT]: (state, { payload: presidentId }) => ({
+    ...state,
+    selectedPresident: presidents.filter(({id}) => id === presidentId)[0]
   }),
 
   [USER_UPDATE_RESULTS]: (state, { payload: results }) => ({
