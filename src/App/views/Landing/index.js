@@ -22,10 +22,14 @@ const getRandomNumberBetween = (min, max) => Math.floor(Math.random() * (max - m
  *    Full docs on the response obj can be found in the documentation for FB.getLoginStatus().
  * 2. Logged into your app and FB.
  */
-const statusChangeCallback = (response /* 1 */) => {
-  getStore().dispatch(updateAuthResponse(response.authResponse, response.status))
+const statusChangeCallback = (response /* 1 */, cb) => {
+  const store = getStore()
 
-  const resultsArr = presidents[0].resultsCopy
+  store.dispatch(updateAuthResponse(response.authResponse, response.status))
+
+  const state = store.getState()
+  const selectedPresident = state.session.selectedPresident
+  const resultsArr = selectedPresident.resultsCopy
 
   console.log('response: ', response)
 
@@ -37,7 +41,7 @@ const statusChangeCallback = (response /* 1 */) => {
         copy: resultsArr[getRandomNumberBetween(0, resultsArr.length - 1)]
       }))
       getStore().dispatch(updateFacebookUserData(response))
-      getStore().dispatch(transitionTo('/tree'))
+      if (cb) cb()
     })
   }
 }
@@ -69,7 +73,10 @@ const login = () => {
 
   FB.login(() => {
     FB.getLoginStatus((response) => {
-      statusChangeCallback(response)
+      statusChangeCallback(
+        response,
+        () => getStore().dispatch(transitionTo('/tree'))
+      )
     })
   }, {
     scope: 'public_profile,user_relationships,email',
