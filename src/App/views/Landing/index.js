@@ -128,7 +128,7 @@ const Landing = ({
             }}>
               <Avatar {...{
                 src: president.avatar,
-                size: viewportWidth / 5.5
+                size: Math.min(viewportWidth / 5.5, 140)
               }} />
             </div>
           )
