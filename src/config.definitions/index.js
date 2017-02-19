@@ -38,7 +38,7 @@ const presidents = [
     firstName: 'Abraham',
     lastName: 'Lincoln',
     name: 'Abraham Lincoln',
-    avatar: 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Gardner-Photo-Lincoln.jpg',
+    avatar: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Abraham_Lincoln_O-77_matte_collodion_print.jpg',
     resultsCopy: [ 'resultsCopy' ]
   },
 

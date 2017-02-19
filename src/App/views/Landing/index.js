@@ -108,25 +108,37 @@ const Landing = ({
           height='35'
           src='/images/stars.svg'
         />
-        <h1 className={style.siteTitle}>Cousin {selectedPresident.lastName}</h1>
-        <div className={style.trumpWrapper}>
-          <Avatar
-            src={selectedPresident.avatar}
-            size={150}
-          />
+        <h1 className={style.siteTitle}>Presidential Cousins</h1>
+        <div style={{display: 'flex'}}>
+          {presidents.map(president => {
+            const selected = selectedPresident.id === president.id
+            return (
+              <div {...{
+                className: style.avatarWrapper,
+                onClick: e => updateSelectedPresident(president.id),
+                style: {
+                  margin: '0 8px',
+                  opacity: selected ? '1.0' : '0.3'
+                }
+              }}>
+                <Avatar {...{
+                  src: president.avatar,
+                  size: 150
+                }} />
+              </div>
+            )
+          })}
         </div>
         <div className={style.description}>
           {`See how closely related you are to `}
           <select {...{
             style: {
               textAlign: 'center',
-              color: 'black'
+              color: 'black',
+              padding: '8px 16px'
             },
             value: selectedPresident.id,
-            onChange: (e) => {
-              console.log(e.target.value)
-              updateSelectedPresident(e.target.value)
-            }
+            onChange: e => updateSelectedPresident(e.target.value)
           }}>
             {presidents.map(({id, name}) =>
               <option {...{

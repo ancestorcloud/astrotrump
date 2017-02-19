@@ -32,7 +32,7 @@
     .siteTitle {
       margin: 0;
       color: #fff;
-      font-size: 64px;
+      font-size: 48px;
       text-transform: uppercase;
       text-align: center;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -40,11 +40,13 @@
 
       @media (width <= 620px) {
         .siteTitle {
-          font-size: 32px;
+          font-size: 28px;
         }
       }
 
-    .trumpWrapper {
+    .avatarWrapper {
+      transition: opacity 1s, width 1s;
+      cursor: pointer;
     }
 
     .description {
