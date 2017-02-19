@@ -131,4 +131,4 @@ const Result = React.createClass({
 export default connect(({session, ogfResults}) => ({
   session,
   ogfResults
-}))(Result)
+}))(Result) 
