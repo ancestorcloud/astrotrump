@@ -7,7 +7,7 @@ const presidents = [
     name: 'Donald Trump',
     avatar: '/images/trump.jpg',
     ogfId: '577114544',
-    facebookBannerImage: 'https://i.imgur.com/rYSxqyU.jpg',
+    facebookBannerImage: 'https://i.imgur.com/LidVqkH.jpg',
     resultsCopy: [
       'You are more closely related to Trump than 80% of the human race. Did you know, he is just as concerned about family relationships as you? Donald Trump was an active member of the “birther” movement, a popular conspiracy theory that came about during Obama’s 2008 election. He conducted an investigation in Hawaii to backup his accusations. In 2014, when Obama released his information publicly, Trump referred to it as his “so-called birth certificate, or whatever it was.” Looks like that family curiosity is in your DNA.',
       'No wonder your hair looks like that sometimes! Although when The Donald wakes up in the morning his locks look quite differently. His remarkable hairstyle is achieved after blow-drying his hair forward and then combing it backward. At this time we can not divulge the secrets of how he maintains his many shades of curiously unclear hair. Although your roots may have their bad days, your genetic roots will forever have a claim to american fame.',
