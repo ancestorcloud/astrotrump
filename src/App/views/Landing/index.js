@@ -122,19 +122,13 @@ const Landing = ({
               className: style.avatarWrapper,
               onClick: e => updateSelectedPresident(president.id),
               style: {
-                margin: narrow ? '4px' : '8px',
+                margin: viewportWidth / 100,
                 opacity: selected ? '1.0' : '0.3'
               }
             }}>
               <Avatar {...{
                 src: president.avatar,
-                size: viewportWidth > 970
-                  ? 200
-                  : viewportWidth > 750
-                    ? 150
-                    : viewportWidth > 500
-                      ? 100
-                      : 80
+                size: viewportWidth / 5.5
               }} />
             </div>
           )
