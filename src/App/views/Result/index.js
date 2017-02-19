@@ -50,8 +50,6 @@ const ResultUI = ({
     facebookBannerImage: selectedPresident.facebookBannerImage
   }
 
-  console.log('shareData: ', shareData)
-
   return (
     <div className={style.wrapper}>
       <div className={style.main}>
