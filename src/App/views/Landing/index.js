@@ -99,81 +99,78 @@ const Landing = ({
 
   transitionTo,
   updateSelectedPresident
-}) => {
-  return (
-    <div className={style.hero}>
-      <div className={style.heroMain}>
-        <img
-          height='35'
-          src='/images/stars.svg'
-        />
-        <h1 className={style.siteTitle}>Presidential Cousins</h1>
-        <div style={{display: 'flex'}}>
-          {presidents.map(president => {
-            const selected = selectedPresident.id === president.id
-            return (
-              <div {...{
-                className: style.avatarWrapper,
-                onClick: e => updateSelectedPresident(president.id),
-                style: {
-                  margin: '0 8px',
-                  opacity: selected ? '1.0' : '0.3'
-                }
-              }}>
-                <Avatar {...{
-                  src: president.avatar,
-                  size: 150
-                }} />
-              </div>
-            )
-          })}
-        </div>
-        <div className={style.description}>
-          {`See how closely related you are to `}
-          <select {...{
-            style: {
-              textAlign: 'center',
-              color: 'black',
-              padding: '8px 16px'
-            },
-            value: selectedPresident.id,
-            onChange: e => updateSelectedPresident(e.target.value)
-          }}>
-            {presidents.map(({id, name}) =>
-              <option {...{
-                value: id
-              }}>{name}</option>
-            )}
-          </select>
-        </div>
-        <a onClick={login}>
-          <Btn
-            theme='facebook'
-            iconSrc='/images/facebook.svg'
-            copy='Continue with Facebook'
-          />
-        </a>
-        <div style={{width: '100%', maxWidth: '700px'}}>
-          <StepList
-            steps={[
-              'Click the button',
-              'Add your family',
-              'Discover the truth'
-            ]}
-          />
-        </div>
-      </div>
-      <div className={style.heroBanner}>
-        <div className={style.heroBannerImagesWrapper}>
-          {bannerImages}
-        </div>
-      </div>
-      <Footer
-        color='navy'
+}) =>
+  <div className={style.hero}>
+    <div className={style.heroMain}>
+      <img
+        height='35'
+        src='/images/stars.svg'
       />
+      <h1 className={style.siteTitle}>Presidential Cousins</h1>
+      <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+        {presidents.map(president => {
+          const selected = selectedPresident.id === president.id
+          return (
+            <div {...{
+              className: style.avatarWrapper,
+              onClick: e => updateSelectedPresident(president.id),
+              style: {
+                margin: '8px',
+                opacity: selected ? '1.0' : '0.3'
+              }
+            }}>
+              <Avatar {...{
+                src: president.avatar,
+                size: 150
+              }} />
+            </div>
+          )
+        })}
+      </div>
+      <div className={style.description}>
+        {`See how closely related you are to `}
+        <select {...{
+          style: {
+            textAlign: 'center',
+            color: 'black',
+            padding: '8px 16px'
+          },
+          value: selectedPresident.id,
+          onChange: e => updateSelectedPresident(e.target.value)
+        }}>
+          {presidents.map(({id, name}) =>
+            <option {...{
+              value: id
+            }}>{name}</option>
+          )}
+        </select>
+      </div>
+      <a onClick={login}>
+        <Btn
+          theme='facebook'
+          iconSrc='/images/facebook.svg'
+          copy='Continue with Facebook'
+        />
+      </a>
+      <div style={{width: '100%', maxWidth: '700px'}}>
+        <StepList
+          steps={[
+            'Click the button',
+            'Add your family',
+            'Discover the truth'
+          ]}
+        />
+      </div>
     </div>
-  )
-}
+    <div className={style.heroBanner}>
+      <div className={style.heroBannerImagesWrapper}>
+        {bannerImages}
+      </div>
+    </div>
+    <Footer
+      color='navy'
+    />
+  </div>
 
 Landing.propTypes = {
   session: PropTypes.object,

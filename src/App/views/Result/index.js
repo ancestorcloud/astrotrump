@@ -50,6 +50,8 @@ const ResultUI = ({
     facebookBannerImage: selectedPresident.facebookBannerImage
   }
 
+  console.log('shareData: ', shareData)
+
   return (
     <div className={style.wrapper}>
       <div className={style.main}>
@@ -106,6 +108,10 @@ const ResultUI = ({
                 textAlign: 'center'
               }}>How did we know?</h3>
               <div>{`Based on family data almost any two people can be matched to a common ancestor. We've got a global family tree with information on most people's ancestors. To accurately determine your common ancestor with Trump we need a little bit more info about your family. Your info is always kept private.`}</div>
+              <h3 style={{
+                textAlign: 'center'
+              }}>Want to know more?</h3>
+              <div>{`Interested in learning more about your family? Trace uses expert researchers to do all the heavy lifting discovering your family origins. We’ll compile your family’s narrative using documents, pictures, bios, and more. You belong to a family narrative that is bigger than yourself, find out now with Trace.`}</div>
               <Footer />
             </div>
           </div>
