@@ -37,6 +37,7 @@ const statusChangeCallback = (response /* 1 */) => {
         copy: resultsArr[getRandomNumberBetween(0, resultsArr.length - 1)]
       }))
       getStore().dispatch(updateFacebookUserData(response))
+      getStore().dispatch(transitionTo('/tree'))
     })
   }
 }
@@ -99,8 +100,6 @@ const Landing = ({
   transitionTo,
   updateSelectedPresident
 }) => {
-  if (sessionStatusIsConnected) transitionTo('/tree')
-
   return (
     <div className={style.hero}>
       <div className={style.heroMain}>

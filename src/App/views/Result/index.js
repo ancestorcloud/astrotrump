@@ -46,8 +46,8 @@ const ResultUI = ({
   const shareData = {
     link: 'https://cousintrump.com',
     title: `I'm ${degreeWithSuffix} cousins with ${selectedPresident.name}!`,
-    description: `You might be related to ${selectedPresident.lastName} as well. Discover the truth now! #Cousin${selectedPresident.lastName}`,
-    facebookBannerImage: 'http://i.imgur.com/rYSxqyU.jpg'
+    description: `You might be related to ${selectedPresident.lastName} as well. Discover the truth now! #PresidentialCousins`,
+    facebookBannerImage: selectedPresident.facebookBannerImage
   }
 
   return (
@@ -101,7 +101,7 @@ const ResultUI = ({
                 height: '3px',
                 backgroundColor: '#aaa'
               }}/>
-              <h2>#Cousin{selectedPresident.lastName}</h2>
+              <h2>#PresidentialCousins</h2>
               <h3 style={{
                 textAlign: 'center'
               }}>How did we know?</h3>
@@ -131,4 +131,4 @@ const Result = React.createClass({
 export default connect(({session, ogfResults}) => ({
   session,
   ogfResults
-}))(Result) 
+}))(Result)
