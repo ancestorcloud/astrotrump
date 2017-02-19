@@ -105,14 +105,14 @@ const Landing = ({
   selectedPresident,
 
   transitionTo,
-  updateSelectedPresident
+  updateSelectedPresident,
+
+  viewportWidth,
+  narrow
 }) =>
   <div className={style.hero}>
     <div className={style.heroMain}>
-      <img
-        height='35'
-        src='/images/stars.svg'
-      />
+      <img src='/images/stars.svg' height='35' />
       <h1 className={style.siteTitle}>Presidential Cousins</h1>
       <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
         {presidents.map(president => {
@@ -122,13 +122,19 @@ const Landing = ({
               className: style.avatarWrapper,
               onClick: e => updateSelectedPresident(president.id),
               style: {
-                margin: '8px',
+                margin: narrow ? '4px' : '8px',
                 opacity: selected ? '1.0' : '0.3'
               }
             }}>
               <Avatar {...{
                 src: president.avatar,
-                size: 150
+                size: viewportWidth > 970
+                  ? 200
+                  : viewportWidth > 750
+                    ? 150
+                    : viewportWidth > 500
+                      ? 100
+                      : 80
               }} />
             </div>
           )
@@ -187,7 +193,20 @@ Landing.propTypes = {
 
 const boundActions = { transitionTo, updateSelectedPresident }
 
-export default connect(({session}) => ({
-  sessionStatusIsConnected: session.status === 'connected',
-  selectedPresident: session.selectedPresident
-}), boundActions)(Landing)
+export default connect(
+  ({
+    session,
+    viewState: {
+      viewportSize: {
+        width: viewportWidth,
+        name: viewportSizeName
+      }
+    }
+  }) => ({
+    sessionStatusIsConnected: session.status === 'connected',
+    selectedPresident: session.selectedPresident,
+    narrow: viewportSizeName === 'narrow',
+    viewportWidth
+  }),
+  boundActions
+)(Landing)

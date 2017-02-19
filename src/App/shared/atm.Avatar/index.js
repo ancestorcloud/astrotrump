@@ -12,7 +12,8 @@ const Avatar = ({ src, size, showBorder = true, showAlert }) => {
       style={{
         width: `${size}px`,
         height: `${size}px`,
-        backgroundImage: `url('${src}')`
+        backgroundImage: `url('${src}')`,
+        borderWidth: `${size / 40}px`
       }}
     />
   )

@@ -110,7 +110,7 @@ const ResultUI = ({
                 textAlign: 'center'
               }}>Want to know more?</h3>
               <div>
-                {`Interested in learning more about your family? Trace uses expert researchers to do all the heavy lifting discovering your family origins. We’ll compile your family’s narrative using documents, pictures, bios, and more. You belong to a family narrative that is bigger than yourself, find out now with `}
+                {`Interested in learning more about your family? Trace uses expert researchers to do all the heavy lifting discovering your family origins. We’ll compile your family’s narrative using documents, pictures, bios, and more. You belong to a family narrative that is bigger than yourself, find yours now with `}
                 <a {...{
                   href: 'https://trace.com',
                   style: { color: 'inherit' }
