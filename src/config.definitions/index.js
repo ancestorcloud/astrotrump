@@ -48,7 +48,7 @@ const presidents = [
     id: 'lincoln',
     firstName: 'Abe',
     lastName: 'Lincoln',
-    name: 'Abraham Lincoln',
+    name: 'Abe Lincoln',
     avatar: '/images/lincoln.jpg',
     facebookBannerImage: 'https://i.imgur.com/QCPkjmt.png',
     resultsCopy: [ 'resultsCopy' ]
