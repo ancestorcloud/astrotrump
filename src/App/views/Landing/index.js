@@ -113,7 +113,7 @@ const Landing = ({
   <div className={style.hero}>
     <div className={style.heroMain}>
       <img src='/images/stars.svg' height='35' />
-      <h1 className={style.siteTitle}>Presidential Cousins</h1>
+      <h1 className={style.siteTitle}>{`Cousin POTUS`}</h1>
       <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
         {presidents.map(president => {
           const selected = selectedPresident.id === president.id
