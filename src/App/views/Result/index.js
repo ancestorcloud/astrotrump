@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import style from './style'
 
 import { replaceWith } from 'App/state/routing/actions'
+import { getSelectedPresident } from 'utils.redux'
 
 import TrumpConnection from 'mol.TrumpConnection'
 import Footer from 'org.Footer'
@@ -25,28 +26,39 @@ const getSuffix = (number) => {
 const ResultUI = ({
   session: {
     user,
-    results: {
-      degrees: randomDegrees,
-      copy: resultCopy
-    }
+    // results: {
+    //   degrees: randomDegrees,
+    //   copy: resultCopy
+    // },
+    // presidentsAndResults,
+    // selectedPresident
+    // president: selectedPresident
   },
+  president: selectedPresident,
   ogfResults: {
     isFetching,
     ogfDegrees
   }
 }) => {
+  const {
+    results: {
+      degrees: randomDegrees,
+      copy: resultCopy
+    }
+  } = selectedPresident
+
   const degrees =
-  isFetching
-  ? undefined
-  : ogfDegrees || randomDegrees
+    isFetching
+      ? undefined
+      : ogfDegrees || randomDegrees
 
   const degreeWithSuffix = `${degrees}${getSuffix(degrees)}`
 
   const shareData = {
     link: 'https://cousintrump.com',
-    title: `I'm ${degreeWithSuffix} cousins with Donald Trump!`,
-    description: 'You might be related to Trump as well. Discover the truth now! #CousinTrump',
-    facebookBannerImage: 'http://i.imgur.com/rYSxqyU.jpg'
+    title: `I'm ${degreeWithSuffix} cousins with ${selectedPresident.name}!`,
+    description: `You might be related to ${selectedPresident.lastName} as well. Discover the truth now! #CousinPOTUS`,
+    facebookBannerImage: selectedPresident.facebookBannerImage
   }
 
   return (
@@ -62,6 +74,7 @@ const ResultUI = ({
           paddingBottom: degrees ? '0' : '64px' /* 1 */
         }}>
           <TrumpConnection
+            president={selectedPresident}
             avatarSrc={user && user.picture && user.picture.data && user.picture.data.url}
             degrees={degrees || undefined}
             size='big'
@@ -74,7 +87,7 @@ const ResultUI = ({
         ? (
           <div className={style.explainerWrapper}>
             <div className={style.explainer}>
-              <h2>You are {degreeWithSuffix} cousins with Donald</h2>
+              <h2>You are {degreeWithSuffix} cousins with {selectedPresident.firstName}</h2>
               <div>{resultCopy}</div>
               <div className={style.buttonsWrapper}>
                 <div>
@@ -99,11 +112,22 @@ const ResultUI = ({
                 height: '3px',
                 backgroundColor: '#aaa'
               }}/>
-              <h2>#CousinTrump</h2>
+              <h2>#CousinPOTUS</h2>
               <h3 style={{
                 textAlign: 'center'
               }}>How did we know?</h3>
-              <div>Based on family data almost any two people can be matched to a common ancestor. We've got a global family tree with information on most people's ancestors. To accurately determine your common ancestor with Trump we need a little bit more info about your family. Your info is always kept private.</div>
+              <div>{`Based on family data almost any two people can be matched to a common ancestor. We've got a global family tree with information on most people's ancestors. To accurately determine your common ancestor with Trump we need a little bit more info about your family. Your info is always kept private.`}</div>
+              <h3 style={{
+                textAlign: 'center'
+              }}>Want to know more?</h3>
+              <div>
+                {`Interested in learning more about your family? Trace uses expert researchers to do all the heavy lifting discovering your family origins. We’ll compile your family’s narrative using documents, pictures, bios, and more. You belong to a family narrative that is bigger than yourself, find yours now with `}
+                <a {...{
+                  href: 'https://trace.com',
+                  style: { color: 'inherit' }
+                }}>Trace</a>
+                {`.`}
+              </div>
               <Footer />
             </div>
           </div>
@@ -126,7 +150,11 @@ const Result = React.createClass({
   }
 })
 
-export default connect(({session, ogfResults}) => ({
-  session,
-  ogfResults
-}))(Result)
+export default connect((state) => {
+  const {session, ogfResults} = state
+  return {
+    session,
+    ogfResults,
+    president: getSelectedPresident(state) || {}
+  }
+})(Result)

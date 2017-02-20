@@ -1,8 +1,11 @@
 import style from './style'
 import React, { PropTypes } from 'react'
+
 import { connect } from 'react-redux'
 import { captureData, updateTreeNode, findRelation } from 'App/state/actions'
 import { transitionTo, replaceWith } from 'App/state/routing/actions'
+import { getSelectedPresident } from 'utils.redux'
+
 import { Y, X } from 'obj.Layout'
 import Btn from 'atm.Btn'
 import Avatar from 'atm.Avatar'
@@ -55,7 +58,7 @@ const AncestorBlock = ({ data, onSelect, size }) =>
     </span>
   </div>
 
-const SubmitTreeUi = ({onTreeSubmit, modalData, onNodeSelect, progress, treeData: {
+const SubmitTreeUi = ({president, onTreeSubmit, modalData, onNodeSelect, progress, treeData: {
   user,
   father,
   mother,
@@ -92,9 +95,13 @@ const SubmitTreeUi = ({onTreeSubmit, modalData, onNodeSelect, progress, treeData
     </Y>
     <Y y tag='footer' className={style.footer}>
 
-      <Btn onClick={onTreeSubmit} copy='Match Me To Trump' theme='rust' style={{padding: '15px', margin: '10px 0'}} />
+      <Btn onClick={onTreeSubmit} copy={`Match Me To ${president.lastName}`} theme='rust' style={{padding: '15px', margin: '10px 0'}} />
 
-      <TrumpConnection avatarSrc={user.pictureUrl} size='small'/>
+      <TrumpConnection {...{
+        president,
+        avatarSrc: user.pictureUrl,
+        size: 'small'
+      }} />
 
       <span>Add more information about your family to better match</span>
 
@@ -186,7 +193,7 @@ const SubmitTree = React.createClass({
   render () {
     const { props, state, onTreeSubmit, onNodeSelect, onNodeUpdate, onFormClose } = this
     const { modalIsOpen, currentNode } = state
-    const { treeData } = props
+    const { treeData, president } = props
     const progress = calculateProgress(treeData)
     const nodeData = treeData[currentNode]
     const modalData = {
@@ -197,11 +204,15 @@ const SubmitTree = React.createClass({
       onNodeUpdate
     }
 
-    return <SubmitTreeUi { ...{ onTreeSubmit, modalData, onNodeSelect, treeData, progress } } />
+    return <SubmitTreeUi { ...{ president, onTreeSubmit, modalData, onNodeSelect, treeData, progress } } />
   }
 })
 
-export default connect(({treeData, session}) => ({
-  treeData,
-  isAuthenticated: session.status === 'connected'
-}))(SubmitTree)
+export default connect((state) => {
+  const {treeData, session} = state
+  return {
+    treeData,
+    isAuthenticated: session.status === 'connected',
+    president: getSelectedPresident(state)
+  }
+})(SubmitTree)
