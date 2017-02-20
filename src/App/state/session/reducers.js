@@ -30,8 +30,6 @@ const presidentsAndResults = presidents.map((presidentData, i) => {
   }
 })
 
-console.log(presidentsAndResults)
-
 const initialState = {
   user: {
     family: [],
