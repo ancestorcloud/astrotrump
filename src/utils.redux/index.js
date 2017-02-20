@@ -34,5 +34,5 @@ export function getSelectedPresident (state) {
     && state.session.presidentsAndResults
     && state.session.presidentsAndResults.filter(president => president.selected)
     && state.session.presidentsAndResults.filter(president => president.selected)[0]
-  ) || state.session.presidentsAndResults[0]
+  ) || state.session.presidentsAndResults && state.session.presidentsAndResults[0]
 }
