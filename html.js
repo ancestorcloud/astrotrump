@@ -1,3 +1,5 @@
+var timestamp = '\n\n<!-- ' + new Date() + '-->\n\n'
+
 module.exports = {
   dev: function (data) {
     return {
@@ -11,6 +13,7 @@ module.exports = {
           '<body>',
             '<div id="app"></div>',
             '<script src="/' + data.main + '"></script>',
+            timestamp,
           '</body>',
         '</html>'
       ].join('')
@@ -58,6 +61,7 @@ module.exports = {
           '<body>',
             '<div id="app"></div>',
             '<script src="/' + data.main + '"></script>',
+            timestamp,
           '</body>',
         '</html>'
       ].join('')
