@@ -101,7 +101,7 @@ const Landing = ({
 
   viewportWidth,
   narrow
-}) =>
+}) => console.log(selectedPresident) || !selectedPresident ? <div>Loading</div> :
   <div className={style.hero}>
     <div className={style.heroMain}>
       <img src='/images/stars.svg' height='35' />

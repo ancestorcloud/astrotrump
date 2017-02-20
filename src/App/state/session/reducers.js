@@ -17,7 +17,7 @@ import presidents from 'config.definitions'
 
 const getRandomNumberBetween = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
-const presidentsAndResults = presidents.map(presidentData => {
+const presidentsAndResults = presidents.map((presidentData, i) => {
   const { resultsCopy } = presidentData
   const results = {
     degrees: getRandomNumberBetween(18, 45),
@@ -25,9 +25,12 @@ const presidentsAndResults = presidents.map(presidentData => {
   }
   return {
     ...presidentData,
-    results
+    results,
+    selected: i === 0
   }
 })
+
+console.log(presidentsAndResults)
 
 const initialState = {
   user: {
@@ -35,7 +38,6 @@ const initialState = {
     email: ''
   },
   presidentsAndResults,
-  // selectedPresident: presidents[0],
   authResponse: {},
   status: undefined
 }
