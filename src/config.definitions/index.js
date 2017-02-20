@@ -40,11 +40,16 @@ const presidents = [
     lastName: 'Obama',
     name: 'Barack Obama',
     avatar: '/images/obama.jpg',
+    ogfId: '577114544',
     facebookBannerImage: 'https://i.imgur.com/pighVQj.jpg',
     resultsCopy: [
       `Did you know you have a Grammy award winning cousin? Lucky you! Obama is an accomplished author and vocal artist! Most of his income comes from his book sales and the audio book of his auto-biography won him a Grammy! He is not the only former president with a Grammy, both Bill Clinton and Jimmy Carter have earned that honor as well. Maybe it’s time you start up that musical career you’ve always dreamed of - we’re sure Barry can make some introductions.`,
       `You have achievement in your blood! Not only did Obama become the first black president of the United States, he also won a Nobel peace prize! He joins three other presidents Theodore Roosevelt, Woodrow Wilson, and Jimmy Carter who have won the prize. What have you done today?`,
-      `Do you and your cousin Obama share a love for sports? Barry is famously known for loving basketball. He played in high school and earned the nickname “O’Bomber.” He turned the White House tennis court into a basketball court and has a basketball Election Day ritual. He’s been playing more golf and less basketball as his age makes it harder for him to stay competitive, but basketball is still in his heart as many of his golf partners are famous basketball players. Looks like a love of basketball could run in the family!`
+      `Do you and your cousin Obama share a love for sports? Barry is famously known for loving basketball. He played in high school and earned the nickname “O’Bomber.” He turned the White House tennis court into a basketball court and has a basketball Election Day ritual. He’s been playing more golf and less basketball as his age makes it harder for him to stay competitive, but basketball is still in his heart as many of his golf partners are famous basketball players. Looks like a love of basketball could run in the family!`,
+      `You’re cousins, so of course you share a love for great food! Obama is quite the foodie, some of his favorites include the classics - he loves chicken enchiladas, jalapeno cheeseburgers, and barbecue. His specialty as a cook is chili. In the morning he has usually 4-6 eggs, potatoes, and wheat toast for breakfast. Every now and then he adds fruit, bacon and oatmeal to the mix. If you dined with Obama what do you suppose you would eat with him?`,
+      `Are you a pet lover too? Your cousin Barack certainly is! The Obama Family welcomed Bo, a male Portuguese Water Dog to the White House in 2008. He is affectionately referred to as the “First Dog”. In 2013 Bo was joined by Sunny, a female dog of the same breed. Sadly Sunny bit a white house guest in January! Thus, Bo continues to be the favorite of the pooches. A plush toy was even manufactured in Bo’s honor. Would you buy it?`,
+      `Obama’s early family life was anything but simple. So if you’re family has some issues maybe you can relate to your cousin Barack. Barack’s mother was English and father was Kenyan. He once mentioned, “My father looked nothing like the people around me - that he was black as pitch, my mother white as milk.” As a young adult it was difficult to reconcile social perceptions of his multiracial heritage. His parents divorced when he was three and his father killed in a car accident when he was 21. Makes you think twice about the adversity he had to overcome, and the important role family now plays in his life. Consider what challenges your family has faced, we hope it makes you stronger as it did your cousin!`,
+      `You are cousins with a philanthropist! Barack Obama is quite the giver. On his 2010 income of $1.7 million he gave 14% of it to non-profit organizations including 131,000 to Fisher House Foundation, a charity assisting wounded veterans’ families. Does he inspire you to be charitable? Maybe it’s in your blood!`
     ]
   },
 
@@ -54,6 +59,7 @@ const presidents = [
     lastName: 'Lincoln',
     name: 'Abe Lincoln',
     avatar: '/images/lincoln.jpg',
+    ogfId: '577114544',
     facebookBannerImage: 'https://i.imgur.com/QCPkjmt.png',
     resultsCopy: [
       `Woah, you must be a force to reckoned with! Not only did he serve as Commander-in-Chief during the Civil War, but he was also a skilled wrestler. He lost just once in 300 matches. He was held in such high esteem in the wrestling community, he earned the honor of “Outstanding American” in the National Wrestling Hall of Fame. Maybe it’s time to pick up a new family sport?`,
@@ -72,6 +78,7 @@ const presidents = [
     lastName: 'Washington',
     name: 'George Washington',
     avatar: '/images/washington.jpg',
+    ogfId: '577114544',
     facebookBannerImage: 'https://i.imgur.com/wZlBVJX.jpg',
     resultsCopy: [
       `We have good news! You are related to George Washington. It is always good to have a relative with some cash (and definitely relatives who are ON some cash). Did you know Washington’s salary in 1790 was 2% of the total US budget! Talk about life on top! It wasn’t always that way though. He had to borrow money to attend his own first inauguration. Here’s to hoping your financial fortunes follow the same trajectory!`,
