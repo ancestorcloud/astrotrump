@@ -2,6 +2,7 @@ import style from './style'
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { getStore } from 'redux.store'
+import { getSelectedPresident } from 'utils.redux'
 import { transitionTo } from 'App/state/routing/actions'
 import { sendUserToSlack } from 'App/state/misc/actions'
 
@@ -14,7 +15,7 @@ import presidents from 'config.definitions'
 
 import { updateAuthResponse, updateSelectedPresident, updateFacebookUserData, updateResults } from 'App/state/session/actions'
 
-const getRandomNumberBetween = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+// const getRandomNumberBetween = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
 /**
  * This is called with the results from FB.getLoginStatus().
@@ -27,20 +28,11 @@ const statusChangeCallback = (response /* 1 */, cb) => {
 
   store.dispatch(updateAuthResponse(response.authResponse, response.status))
 
-  const state = store.getState()
-  const selectedPresident = state.session.selectedPresident
-  const resultsArr = selectedPresident.resultsCopy
-
-  console.log('response: ', response)
-
   if (response.status === 'connected') { /* 2 */
     window.FB.api('/me?fields=name,email,gender,birthday,location,picture.type(large),family{name,birthday,bio,relationship,picture.type(large){url,is_silhouette}}', (response) => {
-      getStore().dispatch(sendUserToSlack(response))
-      getStore().dispatch(updateResults({
-        degrees: getRandomNumberBetween(18, 45),
-        copy: resultsArr[getRandomNumberBetween(0, resultsArr.length - 1)]
-      }))
-      getStore().dispatch(updateFacebookUserData(response))
+      const { dispatch, getState } = getStore()
+      dispatch(sendUserToSlack(response))
+      dispatch(updateFacebookUserData(response))
       if (cb) cb()
     })
   }
@@ -188,19 +180,22 @@ Landing.propTypes = {
 const boundActions = { transitionTo, updateSelectedPresident }
 
 export default connect(
-  ({
-    session,
-    viewState: {
-      viewportSize: {
-        width: viewportWidth,
-        name: viewportSizeName
+  (state) => {
+    const {
+      session,
+      viewState: {
+        viewportSize: {
+          width: viewportWidth,
+          name: viewportSizeName
+        }
       }
+    } = state
+    return {
+      sessionStatusIsConnected: session.status === 'connected',
+      selectedPresident: getSelectedPresident(state),
+      narrow: viewportSizeName === 'narrow',
+      viewportWidth
     }
-  }) => ({
-    sessionStatusIsConnected: session.status === 'connected',
-    selectedPresident: session.selectedPresident,
-    narrow: viewportSizeName === 'narrow',
-    viewportWidth
-  }),
+  },
   boundActions
 )(Landing)

@@ -1,8 +1,11 @@
 import style from './style'
 import React, { PropTypes } from 'react'
+
 import { connect } from 'react-redux'
 import { captureData, updateTreeNode, findRelation } from 'App/state/actions'
 import { transitionTo, replaceWith } from 'App/state/routing/actions'
+import { getSelectedPresident } from 'utils.redux'
+
 import { Y, X } from 'obj.Layout'
 import Btn from 'atm.Btn'
 import Avatar from 'atm.Avatar'
@@ -205,8 +208,11 @@ const SubmitTree = React.createClass({
   }
 })
 
-export default connect(({treeData, session}) => ({
-  treeData,
-  isAuthenticated: session.status === 'connected',
-  president: session.selectedPresident
-}))(SubmitTree)
+export default connect((state) => {
+  const {treeData, session} = state
+  return {
+    treeData,
+    isAuthenticated: session.status === 'connected',
+    president: getSelectedPresident(state)
+  }
+})(SubmitTree)

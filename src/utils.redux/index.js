@@ -26,3 +26,7 @@ export function createAsyncActions (name) {
     failure
   ]
 }
+
+export function getSelectedPresident (state) {
+  return state.session.presidentsAndResults.filter(president => president.selected)[0]
+}

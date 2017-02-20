@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import style from './style'
 
 import { replaceWith } from 'App/state/routing/actions'
+import { getSelectedPresident } from 'utils.redux'
 
 import TrumpConnection from 'mol.TrumpConnection'
 import Footer from 'org.Footer'
@@ -25,21 +26,31 @@ const getSuffix = (number) => {
 const ResultUI = ({
   session: {
     user,
-    results: {
-      degrees: randomDegrees,
-      copy: resultCopy
-    },
-    selectedPresident
+    // results: {
+    //   degrees: randomDegrees,
+    //   copy: resultCopy
+    // },
+    // presidentsAndResults,
+    // selectedPresident
+    // president: selectedPresident
   },
+  president: selectedPresident,
   ogfResults: {
     isFetching,
     ogfDegrees
   }
 }) => {
+  const {
+    results: {
+      degrees: randomDegrees,
+      copy: resultCopy
+    }
+  } = selectedPresident
+
   const degrees =
-  isFetching
-  ? undefined
-  : ogfDegrees || randomDegrees
+    isFetching
+      ? undefined
+      : ogfDegrees || randomDegrees
 
   const degreeWithSuffix = `${degrees}${getSuffix(degrees)}`
 
@@ -139,7 +150,11 @@ const Result = React.createClass({
   }
 })
 
-export default connect(({session, ogfResults}) => ({
-  session,
-  ogfResults
-}))(Result)
+export default connect((state) => {
+  const {session, ogfResults} = state
+  return {
+    session,
+    ogfResults,
+    president: getSelectedPresident(state) || {}
+  }
+})(Result)

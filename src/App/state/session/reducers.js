@@ -15,12 +15,27 @@ const [
 
 import presidents from 'config.definitions'
 
+const getRandomNumberBetween = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+
+const presidentsAndResults = presidents.map(presidentData => {
+  const { resultsCopy } = presidentData
+  const results = {
+    degrees: getRandomNumberBetween(18, 45),
+    copy: resultsCopy[getRandomNumberBetween(0, resultsCopy.length - 1)]
+  }
+  return {
+    ...presidentData,
+    results
+  }
+})
+
 const initialState = {
   user: {
     family: [],
     email: ''
   },
-  selectedPresident: presidents[0],
+  presidentsAndResults,
+  // selectedPresident: presidents[0],
   authResponse: {},
   status: undefined
 }
@@ -40,14 +55,21 @@ export const session = createReducer(initialState, {
     }
   }),
 
-  [USER_UPDATE_SELECTED_PRESIDENT]: (state, { payload: presidentId }) => ({
-    ...state,
-    selectedPresident: presidents.filter(({id}) => id === presidentId)[0]
-  }),
+  [USER_UPDATE_SELECTED_PRESIDENT]: (state, { payload: presidentId }) => {
+    const presidentsAndResults = state.presidentsAndResults.map(president => ({
+      ...president,
+      selected: president.id === presidentId
+    }))
+
+    return {
+      ...state,
+      presidentsAndResults
+    }
+  },
 
   [USER_UPDATE_RESULTS]: (state, { payload: results }) => ({
     ...state,
-    results
+    presidentsAndResults: results
   }),
 
   [RECEIVE_SESSION_ID_SUCCESS]: (state, { payload: { ogfSessionId } }) => ({

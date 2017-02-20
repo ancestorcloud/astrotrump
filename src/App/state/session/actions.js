@@ -31,7 +31,6 @@ export const updateResults = (data) => ({
   payload: data
 })
 
-
 export const receivedSessionId = (value) => ({
   type: RECEIVE_SESSION_ID_ACTION_TYPES[1],
   payload: {
