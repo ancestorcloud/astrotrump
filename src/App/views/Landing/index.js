@@ -13,7 +13,7 @@ import StepList from './components/StepList'
 
 import presidents from 'config.definitions'
 
-import { updateAuthResponse, updateSelectedPresident, updateFacebookUserData, updateResults } from 'App/state/session/actions'
+import { updateAuthResponse, updateSelectedPresident, updateFacebookUserData } from 'App/state/session/actions'
 
 // const getRandomNumberBetween = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
@@ -181,6 +181,7 @@ const boundActions = { transitionTo, updateSelectedPresident }
 
 export default connect(
   (state) => {
+    console.log('state: ', state)
     const {
       session,
       viewState: {

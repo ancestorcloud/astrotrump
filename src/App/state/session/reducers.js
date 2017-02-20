@@ -69,11 +69,6 @@ export const session = createReducer(initialState, {
     }
   },
 
-  [USER_UPDATE_RESULTS]: (state, { payload: results }) => ({
-    ...state,
-    presidentsAndResults: results
-  }),
-
   [RECEIVE_SESSION_ID_SUCCESS]: (state, { payload: { ogfSessionId } }) => ({
     ...state,
     ogfSessionId

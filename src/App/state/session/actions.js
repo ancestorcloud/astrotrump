@@ -26,11 +26,6 @@ export const updateSelectedPresident = (data) => ({
   payload: data
 })
 
-export const updateResults = (data) => ({
-  type: USER_UPDATE_RESULTS,
-  payload: data
-})
-
 export const receivedSessionId = (value) => ({
   type: RECEIVE_SESSION_ID_ACTION_TYPES[1],
   payload: {
