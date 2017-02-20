@@ -46,7 +46,7 @@ const presidents = [
 
   {
     id: 'lincoln',
-    firstName: 'Abraham',
+    firstName: 'Abe',
     lastName: 'Lincoln',
     name: 'Abraham Lincoln',
     avatar: '/images/lincoln.jpg',
